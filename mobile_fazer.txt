@@ -1,0 +1,17 @@
+Telas Mobile 20
+
+Telas até o dia 12 - 5
+ Tela de loading
+ Login
+ Cadastro
+ home
+ lista de anuncios
+
+API... só Deus sabe
+
+Animações
+Notificações
+Outras telas
+Implementação do mapa na home
+Chat
+Cadastro de fotos :´(
