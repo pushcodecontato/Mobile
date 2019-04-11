@@ -10,6 +10,7 @@
     android:orientation="vertical"
     android:padding="15dp"
     >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,66 +18,65 @@
         android:orientation="vertical"
 
         >
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            >
-           <de.hdodenhof.circleimageview.CircleImageView
-               android:layout_width="250dp"
-               android:layout_height="250dp"
-               android:src="@drawable/camera"
-               android:id="@+id/imgCadastro"
-               />
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgCadastro"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/camera" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
             android:orientation="vertical"
-            >
+            android:padding="20dp">
+
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nome"
                 android:id="@+id/txtNome"
-                android:layout_marginBottom="25dp"
-                />
-            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:layout_marginBottom="25dp"
+                android:hint="Nome" />
+
+            <EditText
                 android:id="@+id/txtEmail_cadastro"
-                android:layout_marginBottom="25dp"
-                />
-            
-            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Data nascimento"
+                android:layout_marginBottom="25dp"
+                android:hint="Email" />
+
+            <EditText
                 android:id="@+id/txtDtNasc"
-                android:layout_marginBottom="25dp"
-                />
-
-            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Senha"
+                android:layout_marginBottom="25dp"
+                android:hint="Data nascimento" />
+
+            <EditText
                 android:id="@+id/txtSenha_cadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="100dp"
+                android:hint="Senha"
 
                 />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Cadastrar"
-                android:onClick="btnCadastrar"
                 android:background="@drawable/btn_padrao"
+                android:onClick="btnCadastrar"
+                android:text="Cadastrar"
 
-                android:textColor="@color/white"
-                />
+                android:textColor="@color/white" />
 
 
         </LinearLayout>
