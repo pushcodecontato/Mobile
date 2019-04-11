@@ -19,7 +19,9 @@
         <activity
             android:name=".Activity.activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.activity.CadatrarActivity" />
+        <activity android:name=".homeActivity"></activity>
     </application>
 
 </manifest>

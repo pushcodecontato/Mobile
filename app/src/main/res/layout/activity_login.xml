@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="25dp"
+        android:onClick="cadastrar_conta"
         >
 
         <ImageView
@@ -21,13 +22,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cadastrar-se"
+            android:text="Nova conta"
             android:textSize="20dp"
             android:layout_marginTop="1dp"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/white"/>
 
-            />
     </LinearLayout>
 
     <ImageView
@@ -42,9 +42,10 @@
         android:layout_height="270dp"
         android:orientation="vertical"
         android:padding="20dp"
-        android:background="#fff"
+        android:background="@drawable/cadastro_radius"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
+
         >
         <EditText
             android:layout_width="match_parent"
@@ -67,6 +68,9 @@
             android:layout_height="wrap_content"
             android:text="Login"
             android:layout_marginTop="20dp"
+            android:background="@drawable/btn_padrao"
+            android:textColor="@color/white"
+            android:onClick="btnLogar"
             />
 
         <TextView
@@ -75,7 +79,7 @@
             android:layout_gravity="center"
             android:text="Esqueceu a senha?"
             android:textSize="15dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="17dp"
             />
 
 

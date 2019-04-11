@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/verde_site</item>
         <item name="colorPrimaryDark">@color/verde_escuro</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/verde_site</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />

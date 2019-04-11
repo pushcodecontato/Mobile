@@ -1,9 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadatrarActivity">
+    tools:context=".Activity.activity.CadatrarActivity"
+    android:background="@color/verde_site"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="15dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/cadastro_radius"
+        android:orientation="vertical"
 
-</android.support.constraint.ConstraintLayout>
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            >
+           <de.hdodenhof.circleimageview.CircleImageView
+               android:layout_width="250dp"
+               android:layout_height="250dp"
+               android:src="@drawable/camera"
+               android:id="@+id/imgCadastro"
+               />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="vertical"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
+                android:id="@+id/txtNome"
+                android:layout_marginBottom="25dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:id="@+id/txtEmail_cadastro"
+                android:layout_marginBottom="25dp"
+                />
+            
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Data nascimento"
+                android:id="@+id/txtDtNasc"
+                android:layout_marginBottom="25dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha"
+                android:id="@+id/txtSenha_cadastro"
+                android:layout_marginBottom="100dp"
+
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Cadastrar"
+                android:onClick="btnCadastrar"
+                android:background="@drawable/btn_padrao"
+
+                android:textColor="@color/white"
+                />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
