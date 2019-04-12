@@ -1,5 +1,6 @@
 package com.example.matheus.mobshare.Activity.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -46,13 +47,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (Item.getItemId()) {
             case R.id.nav_anuncios: {
 
-                Toast.makeText(this, "Menu 1", Toast.LENGTH_SHORT).show();
-                Log.d("TESTE!", "Menu1 ");
+                Intent intent = new Intent(this, ListaAnunciosActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.nav_locados: {
-                Toast.makeText(this, "Menu 2", Toast.LENGTH_SHORT).show();
-                Log.d("TESTE!", "Menu2 ");
+                Intent intent = new Intent(this, VisualizarActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.nav_alugados: {

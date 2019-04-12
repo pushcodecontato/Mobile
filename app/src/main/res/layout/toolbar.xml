@@ -10,4 +10,5 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
 </LinearLayout>

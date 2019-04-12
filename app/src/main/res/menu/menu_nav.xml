@@ -2,25 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
         <item android:id="@+id/nav_anuncios"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/anuncios"
             android:title="Anúncios" />
+
         <item android:id="@+id/nav_locados"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/car"
             android:title="Veículos locados" />
+
         <item android:id="@+id/nav_alugados"
-            android:icon="@android:drawable/ic_menu_agenda"
+            android:icon="@drawable/key"
             android:title="Veículos alugados" />
+
         <item android:id="@+id/nav_veiculos"
-            android:icon="@android:drawable/ic_menu_call"
+            android:icon="@drawable/my_car"
             android:title="Meus véiculos" />
+
         <item android:id="@+id/nav_realizadas"
-            android:icon="@android:drawable/ic_menu_call"
+            android:icon="@drawable/anuncio2"
             android:title="Locações realizadas" />
+
         <item android:id="@+id/nav_andamento"
-            android:icon="@android:drawable/ic_menu_call"
+            android:icon="@drawable/play"
             android:title="Em andamento" />
+
         <item android:id="@+id/nav_chat"
-            android:icon="@android:drawable/ic_menu_call"
+            android:icon="@drawable/chat"
             android:title="Chat" />
     </group>
     <group android:id="@+id/group_menu">
@@ -28,4 +34,5 @@
             android:title="Termos de uso" />
 
     </group>
+
 </menu>

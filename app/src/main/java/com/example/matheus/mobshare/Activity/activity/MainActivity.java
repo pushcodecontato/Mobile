@@ -30,11 +30,6 @@ Animation animation;
         }, 1500);
     }
 
-    public void btnIniciar(View v){
-        //Método similar ao setInterval ou setTimeOut
-
-    }
-
 
     @Override
     protected void onStop() {
