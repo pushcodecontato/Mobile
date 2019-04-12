@@ -44,22 +44,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem Item) {
         switch (Item.getItemId()) {
-            case R.id.nav_item_one: {
+            case R.id.nav_anuncios: {
+
                 Toast.makeText(this, "Menu 1", Toast.LENGTH_SHORT).show();
                 Log.d("TESTE!", "Menu1 ");
                 break;
             }
-            case R.id.nav_item_two: {
+            case R.id.nav_locados: {
                 Toast.makeText(this, "Menu 2", Toast.LENGTH_SHORT).show();
                 Log.d("TESTE!", "Menu2 ");
                 break;
             }
-            case R.id.nav_item_three: {
+            case R.id.nav_alugados: {
                 Toast.makeText(this, "Menu 3", Toast.LENGTH_SHORT).show();
                 Log.d("TESTE!", "Menu3 ");
                 break;
             }
-            case R.id.nav_item_four: {
+            case R.id.nav_veiculos: {
                 Toast.makeText(this, "Menu 4", Toast.LENGTH_SHORT).show();
                 Log.d("TESTE!", "Menu4 ");
                 break;

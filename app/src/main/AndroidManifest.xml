@@ -22,6 +22,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Activity.activity.CadatrarActivity" />
         <activity android:name=".Activity.activity.HomeActivity"></activity>
+        <activity android:name=".Activity.activity.VisualizarActivity"></activity>
     </application>
 
 </manifest>

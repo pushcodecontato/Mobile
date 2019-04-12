@@ -2,27 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:background="@color/colorAccent"
+    android:layout_height="150dp"
+    android:background="@color/verde_site"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
-    android:gravity="bottom"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:orientation="horizontal"
+    android:padding="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/nav_header_imageView"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/nav_header_textView"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgCadastro"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/camera" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:text="AndroidPro"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nav_header_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Matheus"
+            android:textSize="19sp"
+            android:textColor="@color/white"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="4.7"
+            android:textColor="@color/white"
+
+            />
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/star"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
