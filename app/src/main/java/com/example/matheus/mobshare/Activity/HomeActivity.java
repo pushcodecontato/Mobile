@@ -5,6 +5,8 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,18 +19,28 @@ import android.widget.Toast;
 
 
 import com.example.matheus.mobshare.R;
+import com.example.matheus.mobshare.adapter.AnuncioAdapter;
+import com.example.matheus.mobshare.fragments.FragmentsAnuncios;
+import com.example.matheus.mobshare.modelView.AnunciosView;
+import com.example.matheus.mobshare.view.ListaAnuncioView;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
+    FragmentManager fm;
+    AnuncioAdapter anuncioAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,6 +51,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = (NavigationView) findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
+
+        fm = getSupportFragmentManager();
+        anuncioAdapter = new AnuncioAdapter(this);
     }
 
 
@@ -47,8 +62,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (Item.getItemId()) {
             case R.id.nav_anuncios: {
 
-                Intent intent = new Intent(this, ListaAnunciosActivity.class);
-                startActivity(intent);
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.frame_layout, new FragmentsAnuncios());
+                ft.commit();
                 break;
             }
             case R.id.nav_locados: {

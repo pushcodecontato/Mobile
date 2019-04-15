@@ -38,6 +38,7 @@
                android:text="Nome Veículo"
                android:textSize="18sp"
                android:textColor="@color/black"
+               android:id="@+id/nome_veiculo"
                />
            <TextView
                android:layout_width="wrap_content"
@@ -46,6 +47,7 @@
                android:textSize="16sp"
                android:layout_marginTop="10dp"
                android:textColor="@color/black"
+               android:id="@+id/nome_locador"
                />
 
            <TextView
@@ -55,6 +57,7 @@
                android:textSize="18sp"
                android:layout_marginTop="5dp"
                android:textColor="@color/black"
+               android:id="@+id/endereco"
                />
            <LinearLayout
                android:layout_width="match_parent"
@@ -69,7 +72,7 @@
                    android:textSize="16dp"
                    android:text="4.7"
                    android:textColor="@color/black"
-
+                   android:id="@+id/avaliacao"
                    />
                <ImageView
                    android:layout_width="22dp"
@@ -83,7 +86,7 @@
                    android:text="15"
                    android:layout_marginLeft="15dp"
                    android:textColor="@color/black"
-
+                   android:id="@+id/numero_pessoas"
                    />
                <ImageView
                    android:layout_width="22dp"
@@ -98,6 +101,7 @@
                    android:text="R$30,00/h"
                    android:layout_marginLeft="60dp"
                    android:textColor="@color/black"
+                   android:id="@+id/valor"
                    />
            </LinearLayout>
 

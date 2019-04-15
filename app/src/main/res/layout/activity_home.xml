@@ -9,6 +9,12 @@
     tools:openDrawer="start">
     <include layout="@layout/toolbar" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/frame_layout"/>
+
     <android.support.design.widget.NavigationView
         android:id="@+id/navView"
         android:layout_width="match_parent"
@@ -16,6 +22,8 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu_nav" />
+
+
 
 
 

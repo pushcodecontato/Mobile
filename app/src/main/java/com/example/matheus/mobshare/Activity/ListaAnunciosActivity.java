@@ -10,7 +10,7 @@ public class ListaAnunciosActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lista_anuncios);
+        setContentView(R.layout.fragment_lista_anuncios);
     }
 
     public class G{

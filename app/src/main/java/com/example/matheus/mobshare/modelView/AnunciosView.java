@@ -16,6 +16,13 @@ public class AnunciosView {
     private String horario_termino;
     private String data_inicil;
     private String data_final;
+    private String rua;
+    private String bairro;
+    private String cidade;
+    private String cep;
+    private String complemento;
+    private String telefone;
+    private String celular;
 
 
     public Integer getId_anuncio() {
@@ -128,5 +135,61 @@ public class AnunciosView {
 
     public void setData_final(String data_final) {
         this.data_final = data_final;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 }

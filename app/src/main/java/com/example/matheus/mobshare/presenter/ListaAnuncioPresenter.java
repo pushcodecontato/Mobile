@@ -1,14 +1,17 @@
 package com.example.matheus.mobshare.presenter;
 
-import android.telecom.Call;
+import android.util.Log;
 
-import com.example.matheus.mobshare.Model.Anuncio;
 import com.example.matheus.mobshare.modelView.AnunciosView;
 import com.example.matheus.mobshare.service.MobShareService;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.ListaAnuncioView;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListaAnuncioPresenter{
 
@@ -25,6 +28,21 @@ public class ListaAnuncioPresenter{
         MobShareService service = ServiceFactoty.create();
 
         Call<List<AnunciosView>> call = service.obterAnuncios();
+
+        call.enqueue(new Callback<List<AnunciosView>>() {
+            @Override
+            public void onResponse(Call<List<AnunciosView>> call, Response<List<AnunciosView>> response) {
+                List<AnunciosView> anuncios = response.body();
+                listaAnuncioView.PreencherListaAnuncio(anuncios);
+                Log.d("Funcionou ", "Anuncios carregados... eu acho");
+            }
+
+            @Override
+            public void onFailure(Call<List<AnunciosView>> call, Throwable t) {
+                Log.d("ERRO ", "Não foi possivel carregar os anuncios");
+            }
+        });
+
 
 
 
