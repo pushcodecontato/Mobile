@@ -1,0 +1,16 @@
+CREATE VIEW view_anuncios as
+SELECT cliente.nome_cliente as locador, cliente.celular, cliente.telefone, cliente.rua, cliente.bairro, cliente.cep, cliente.complemento, cliente.uf, cliente.cidade, cliente.id_cliente,
+anuncios.id_anuncio, anuncios.data_inicial, anuncios.data_final, anuncios.descricao, anuncios.horario_inicio, anuncios.horario_termino,
+veiculos.ano, veiculos.placa, veiculos.quilometragem, veiculos.renavam,
+tipo_veiculo.nome_tipo_veiculo, marca_veiculo.nome_marca, modelo_veiculo.nome_modelo
+
+FROM 
+tbl_cliente as cliente 
+inner join tbl_anuncio as anuncios ON anuncios.id_cliente_locador = cliente.id_cliente 
+inner join tbl_veiculo as veiculos ON veiculos.id_veiculo = anuncios.id_veiculo
+inner join tbl_tipo_veiculo as tipo_veiculo ON veiculos.id_tipo_veiculo = tipo_veiculo.id_tipo_veiculo
+inner join tbl_marca_veiculo as marca_veiculo ON veiculos.id_marca_veiculo = marca_veiculo.id_marca_veiculo
+inner join tbl_marca_veiculo_tipo_veiculo as marca_tipo ON marca_tipo.id_tipo_veiculo = tipo_veiculo.id_tipo_veiculo AND marca_tipo.id_marca_veiculo = marca_veiculo.id_marca_veiculo
+inner join tbl_modelo_veiculo as modelo_veiculo ON veiculos.id_modelo_veiculo = modelo_veiculo.id_modelo
+WHERE anuncios.status_aprovado = 1
+ 
