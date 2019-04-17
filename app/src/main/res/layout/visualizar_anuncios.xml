@@ -18,6 +18,7 @@
             android:text="Nome Veículo"
             android:textColor="@color/white"
             android:textSize="30sp"
+            android:id="@+id/txtNomeVeiculoHeader"
             />
 
     </LinearLayout>
@@ -28,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:background="@color/black"
+            android:id="@+id/imgCarros"
             />
     </LinearLayout>
     <LinearLayout
@@ -54,6 +56,7 @@
                     android:text="R$30,00/h"
                     android:textSize="20sp"
                     android:textColor="@color/black"
+                    android:id="@+id/txtValorHora"
                     />
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -78,7 +81,7 @@
                         android:text="Carro"
                         android:textSize="15sp"
                         android:textColor="@color/black"
-
+                        android:id="@+id/txtTipoVeiculo"
                         />
                 </LinearLayout>
                 <TextView
@@ -89,6 +92,7 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
+                    android:id="@+id/txtNomeVeiculo"
                     />
 
 
@@ -106,6 +110,7 @@
                     android:textSize="16sp"
                     android:text="4.7"
                     android:textColor="@color/black"
+                    android:id="@+id/txtAvaliacao"
 
                     />
                 <ImageView
@@ -120,7 +125,7 @@
                     android:text="15"
                     android:layout_marginLeft="15dp"
                     android:textColor="@color/black"
-
+                    android:id="@+id/txtNumPessoas"
                     />
                 <ImageView
                     android:layout_width="22dp"
@@ -169,6 +174,7 @@
                     android:text="Fiat"
                     android:textSize="15sp"
                     android:textColor="@color/black"
+                    android:id="@+id/txtMarca"
                     />
 
 
@@ -193,6 +199,7 @@
                     android:text="Palio 4 portas"
                     android:textSize="15sp"
                     android:textColor="@color/black"
+                    android:id="@+id/txtModeloVeiculo"
                     />
 
 
@@ -217,6 +224,7 @@
                     android:text="2019"
                     android:textSize="15sp"
                     android:textColor="@color/black"
+                    android:id="@+id/txtAnoVeiculo"
                     />
 
 
@@ -241,6 +249,7 @@
                     android:text="2000km"
                     android:textSize="15sp"
                     android:textColor="@color/black"
+                    android:id="@+id/txtQuilometragem"
                     />
 
 

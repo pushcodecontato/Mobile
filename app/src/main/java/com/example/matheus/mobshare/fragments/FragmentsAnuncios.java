@@ -1,16 +1,18 @@
 package com.example.matheus.mobshare.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.example.matheus.mobshare.Activity.VisualizarActivityView;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
 import com.example.matheus.mobshare.modelView.AnunciosView;
@@ -67,6 +69,11 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getContext(),"Teste", Toast.LENGTH_LONG);
+        AnunciosView anunciosView = anuncioAdapter.getItem(position);
+
+        Intent intent = new Intent(getContext(), VisualizarActivityView.class);
+        intent.putExtra("id_anuncio", anunciosView.getId_anuncio());
+        startActivity(intent);
+        Log.d("Id", String.valueOf(anunciosView.getId_anuncio()));
     }
 }

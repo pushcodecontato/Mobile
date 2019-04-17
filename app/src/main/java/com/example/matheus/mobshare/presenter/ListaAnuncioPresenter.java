@@ -40,6 +40,7 @@ public class ListaAnuncioPresenter{
             @Override
             public void onFailure(Call<List<AnunciosView>> call, Throwable t) {
                 Log.d("ERRO ", "Não foi possivel carregar os anuncios");
+                Log.d("ERRO ", String.valueOf(t));
             }
         });
 

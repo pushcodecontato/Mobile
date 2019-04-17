@@ -1,9 +1,7 @@
 package com.example.matheus.mobshare.Activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,10 +19,6 @@ import android.widget.Toast;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
 import com.example.matheus.mobshare.fragments.FragmentsAnuncios;
-import com.example.matheus.mobshare.modelView.AnunciosView;
-import com.example.matheus.mobshare.view.ListaAnuncioView;
-
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     
@@ -68,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_locados: {
-                Intent intent = new Intent(this, VisualizarActivity.class);
+                Intent intent = new Intent(this, VisualizarActivityView.class);
                 startActivity(intent);
                 break;
             }
