@@ -27,17 +27,17 @@ public class CadastroClientePresenter {
                 ApiResult result = response.body();
                 if(result.isSucesso()){
                     Log.d("Sucesso", result.getMensagem() + result.getAviso());
-                    cadastroClienteView.showMessage("Sucesso", result.getMensagem(), result.getAviso());
+                    cadastroClienteView.showMessageSucesso("Sucesso", result.getMensagem(), result.getAviso());
                 }
                 else{
                     Log.d("Erro", result.getMensagem() + result.getAviso());
-                    cadastroClienteView.showMessage("Erro", result.getMensagem(), "");
+                    cadastroClienteView.showMessageFailed("Erro", result.getMensagem());
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResult> call, Throwable t) {
-                cadastroClienteView.showMessage("Sucesso", t.getMessage(), "não sei");
+                cadastroClienteView.showMessageFailed("Erro", t.getMessage());
                 t.printStackTrace();
             }
         });

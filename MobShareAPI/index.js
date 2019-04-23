@@ -19,7 +19,7 @@ app.use(session({
 const mysqlConnection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "bcd127",
+    password: "",
     database: "mob_share"
 });
 
