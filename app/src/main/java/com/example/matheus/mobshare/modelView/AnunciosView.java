@@ -23,7 +23,7 @@ public class AnunciosView {
     private String complemento;
     private String telefone;
     private String celular;
-
+    private String preco;
 
     public Integer getId_anuncio() {
         return id_anuncio;
@@ -191,5 +191,13 @@ public class AnunciosView {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public String getPreco() {
+        return preco;
+    }
+
+    public void setPreco(String preco) {
+        this.preco = preco;
     }
 }

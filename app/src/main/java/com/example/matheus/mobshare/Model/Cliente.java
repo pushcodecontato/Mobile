@@ -5,21 +5,14 @@ public class Cliente {
     private Integer id_cliente;
     private String nome_cliente;
     private String cpf;
-    private String telefone;
     private String celular;
+    private String email_cliente;
+    private String senha;
+    private String conf_senha;
+    private String dtNascimento;
 
     //MUDAR PARA BITMAP
-    private String cnh_foto;
     private String foto_cliente;
-
-    private String rua;
-    private String bairro;
-    private String cep;
-    private String complemento;
-    private String cidade;
-    private String uf;
-    private String emai;
-    private String senha;
 
 
     public Integer getId_cliente() {
@@ -46,14 +39,6 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
     public String getCelular() {
         return celular;
     }
@@ -62,12 +47,13 @@ public class Cliente {
         this.celular = celular;
     }
 
-    public String getCnh_foto() {
-        return cnh_foto;
+
+    public String getSenha() {
+        return senha;
     }
 
-    public void setCnh_foto(String cnh_foto) {
-        this.cnh_foto = cnh_foto;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getFoto_cliente() {
@@ -78,67 +64,29 @@ public class Cliente {
         this.foto_cliente = foto_cliente;
     }
 
-    public String getRua() {
-        return rua;
+
+
+    public String getDtNascimento() {
+        return dtNascimento;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setDtNascimento(String dtNascimento) {
+        this.dtNascimento = dtNascimento;
     }
 
-    public String getBairro() {
-        return bairro;
+    public String getEmail_cliente() {
+        return email_cliente;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setEmail_cliente(String email_cliente) {
+        this.email_cliente = email_cliente;
     }
 
-    public String getCep() {
-        return cep;
+    public String getConf_senha() {
+        return conf_senha;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
-    public String getEmai() {
-        return emai;
-    }
-
-    public void setEmai(String emai) {
-        this.emai = emai;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setConf_senha(String conf_senha) {
+        this.conf_senha = conf_senha;
     }
 }

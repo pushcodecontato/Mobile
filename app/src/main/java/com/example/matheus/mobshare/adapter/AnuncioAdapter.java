@@ -7,10 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.modelView.AnunciosView;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -32,11 +36,17 @@ public class AnuncioAdapter extends ArrayAdapter<AnunciosView> {
         TextView txtNome_veiculo = v.findViewById(R.id.nome_veiculo);
         TextView txtNome_locador = v.findViewById(R.id.nome_locador);
         TextView txtEndereco = v.findViewById(R.id.endereco);
+        TextView txtValor = v.findViewById(R.id.valor);
+
+
+        ImageView img_veiculo = v.findViewById(R.id.img_veiculo);
+        String url_foto = "http://192.168.0.107/mobshare/ImagensCar/hb20.jpg";
+        Picasso.get().load(url_foto).into(img_veiculo);
 
         txtNome_veiculo.setText(anunciosView.getNome_marca() + " " + anunciosView.getNome_modelo());
         txtNome_locador.setText(anunciosView.getLocador());
         txtEndereco.setText(anunciosView.getRua() + " " + anunciosView.getBairro());
-
+        txtValor.setText("R$ " + anunciosView.getPreco() + "/h");
 
 
         return v;

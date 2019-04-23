@@ -23,13 +23,15 @@ public class VisualizarAnuncioPresenter {
         this.mobShareService = mobShareService;
     }
 
-    public void retonarAnuncio(final int id){
+    public void retonarAnuncio(int id){
         mobShareService.obterAnuncioPorId(id).enqueue(new Callback<List<AnunciosView>>() {
             @Override
             public void onResponse(Call<List<AnunciosView>> call, Response<List<AnunciosView>> response) {
-                Log.d("Sucesso", "Anuncio doi carregado com sucesso");
-                Log.d("Sucesso", String.valueOf(id));
+                Log.d("Sucesso", "Anuncio foi carregado com sucesso");
+                Log.d("Sucesso", String.valueOf(call));
+                Log.d("Sucesso", String.valueOf(response));
                 visualizarAnuncioView.CarregarAnuncioPorId(response.body().get(0));
+
             }
 
             @Override

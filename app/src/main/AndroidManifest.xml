@@ -22,7 +22,7 @@
             android:name=".Activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.CadatrarActivity" />
+        <activity android:name=".Activity.CadastroActivity" />
         <activity android:name=".Activity.HomeActivity"></activity>
         <activity android:name=".Activity.ListaAnunciosActivity"></activity>
         <activity android:name=".Activity.VisualizarActivityView"></activity>

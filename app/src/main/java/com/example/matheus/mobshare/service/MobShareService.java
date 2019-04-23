@@ -1,11 +1,15 @@
 package com.example.matheus.mobshare.service;
 
+import com.example.matheus.mobshare.Model.ApiResult;
+import com.example.matheus.mobshare.Model.Cliente;
 import com.example.matheus.mobshare.modelView.AnunciosView;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface MobShareService {
@@ -17,6 +21,12 @@ public interface MobShareService {
     @GET("/anuncios")
     Call<List<AnunciosView>> obterAnuncios();
 
-    @GET("/Anuncios/{id}")
+    @GET("/anuncios/{id}")
     Call<List<AnunciosView>> obterAnuncioPorId(@Path("id") int id_anuncio);
+
+    @POST("/register")
+    Call<ApiResult> cadastrarCliente(@Body Cliente cliente);
+
+    @POST("/login")
+    Call<ApiResult> loginCliente(@Body Cliente cliente);
 }
