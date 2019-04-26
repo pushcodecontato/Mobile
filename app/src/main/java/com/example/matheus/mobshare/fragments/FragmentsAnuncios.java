@@ -15,7 +15,7 @@ import android.widget.ListView;
 import com.example.matheus.mobshare.Activity.VisualizarActivityView;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
-import com.example.matheus.mobshare.modelView.AnunciosView;
+import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.presenter.ListaAnuncioPresenter;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.ListaAnuncioView;

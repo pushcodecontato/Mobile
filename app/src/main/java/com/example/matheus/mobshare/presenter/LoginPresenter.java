@@ -5,7 +5,10 @@ import android.util.Log;
 import com.example.matheus.mobshare.Model.ApiResult;
 import com.example.matheus.mobshare.Model.Cliente;
 import com.example.matheus.mobshare.service.MobShareService;
+import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.LoginView;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,27 +24,31 @@ public class LoginPresenter {
         this.mobShareService = mobShareService;
     }
     public void LoginPresenter(Cliente cliente){
-        mobShareService.loginCliente(cliente).enqueue(new Callback<ApiResult>() {
-            @Override
-            public void onResponse(Call<ApiResult> call, Response<ApiResult> response) {
-                ApiResult result = response.body();
-                if(result.isSucesso()){
-                    loginView.showMessage(true,"Login efetuado com sucesso");
+       MobShareService service = ServiceFactoty.create();
 
-                }
-                else{
+       Call<List<Cliente>> call = service.loginCliente(cliente);
 
-                    loginView.showMessage(false,"Falha");
+       call.enqueue(new Callback<List<Cliente>>() {
+           @Override
+           public void onResponse(Call<List<Cliente>> call, Response<List<Cliente>> response) {
+               List<Cliente> cliente = response.body();
+               if(!cliente.isEmpty()){
+                   loginView.showMessage(true, "Login efetuado com sucesso.");
+                   loginView.salvarDados(cliente);
+               }else{
+                   Log.d("OIA", "ARROZ");
+               }
 
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ApiResult> call, Throwable t) {
-                Log.d("ERRO", t.getMessage());
-                t.printStackTrace();
-            }
-        });
+
+
+           }
+
+           @Override
+           public void onFailure(Call<List<Cliente>> call, Throwable t) {
+               Log.d("OIA", "ARROZ COM FEIJÃO?");
+           }
+       });
     }
 
 }

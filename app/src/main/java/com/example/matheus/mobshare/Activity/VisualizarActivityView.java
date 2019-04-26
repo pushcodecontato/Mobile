@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.matheus.mobshare.R;
-import com.example.matheus.mobshare.modelView.AnunciosView;
+import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.presenter.VisualizarAnuncioPresenter;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.VisualizarAnuncioView;

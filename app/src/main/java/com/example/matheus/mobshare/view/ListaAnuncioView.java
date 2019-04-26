@@ -1,6 +1,6 @@
 package com.example.matheus.mobshare.view;
 
-import com.example.matheus.mobshare.modelView.AnunciosView;
+import com.example.matheus.mobshare.Model.AnunciosView;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.matheus.mobshare.modelView;
+package com.example.matheus.mobshare.Model;
 
 public class AnunciosView {
 

@@ -85,12 +85,14 @@ app.post("/register",async (req, res) => {
     var dt_nasc = ano + "-" + mes + "-" + dia
 	
 	var imagemBinary = new Buffer(img_cliente64, 'base64');
-	var img = uniqid() + ".jpg";
-	var file = fs.open(img, imagemBinary);
-	console.log(file);
-
+	var imgCliente = "img/" + uniqid() + ".jpg";
+    
+    fs.appendFile(imgCliente, imagemBinary , function(erro){
+		if(erro) throw erro
+			console.log("OI " + erro);
+	});
 	
-	//console.log(nome + "/n" + email_cliente + "/n" + senha + "/n" + conf_senha + " " + dt_nasc + " " + img_cliente64);
+
     //Primeira consulta para verificar se o email existe
     var sql = `SELECT count(*) as linhas FROM tbl_cliente WHERE email ="${email_cliente}"`;
     let rows = await new Promise((resolve, reject) => {    
@@ -100,14 +102,14 @@ app.post("/register",async (req, res) => {
 
     })
     
-    /* let num_rows = rows[0];
+    let num_rows = rows[0];
     if(num_rows.linhas >= 1)
         res.send({"sucesso"  : false, "mensagem" : "Este email já foi cadastrado! ", "aviso" : "Insira um email válido"});
     else{
         if(senha != conf_senha){
             res.send({"sucesso" : false, "mensagem" : "As senhas inseridas precisam ser iguais!"});
         }else{
-            sql = `INSERT INTO tbl_cliente (foto_cliente, nome_cliente, email, dt_nascimento, senha) VALUES ("${imagemCliente}",${nome}", "${email_cliente}", "${dt_nasc}", "${senha}")`;
+            sql = `INSERT INTO tbl_cliente (foto_cliente, nome_cliente, email, dt_nascimento, senha) VALUES ("${imgCliente}", "${nome}", "${email_cliente}", "${dt_nasc}", "${senha}")`;
             mysqlConnection.query(sql, function (erro, result, field){
                 if(!erro){
                     res.send({"sucesso": true, 
@@ -121,21 +123,22 @@ app.post("/register",async (req, res) => {
             });
         }
     }
-	*/
+	
         
 });
 app.post("/login", (req, res) => {
     
     const email = req.body.email_cliente;
     const senha = req.body.senha;
-    const sql = `SELECT email, senha FROM tbl_cliente WHERE email = "${email}" AND senha = "${senha}"`;
+    const sql = `SELECT * FROM tbl_cliente WHERE email = "${email}" AND senha = "${senha}"`;
     mysqlConnection.query(sql, function(erro, result){
         if(erro){
             console.log(erro);
         }
         else{
             if(result.length > 0){
-                res.send({"sucesso" : true, "mensagem" : "Login efetuado com sucesso."});
+                res.send(result);
+                console.log(result);
             }
             else{
                 res.send({"sucesso" : false, "mensagem" : "Email ou senha incorreto."});

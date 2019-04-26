@@ -2,7 +2,7 @@ package com.example.matheus.mobshare.presenter;
 
 import android.util.Log;
 
-import com.example.matheus.mobshare.modelView.AnunciosView;
+import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.service.MobShareService;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.ListaAnuncioView;

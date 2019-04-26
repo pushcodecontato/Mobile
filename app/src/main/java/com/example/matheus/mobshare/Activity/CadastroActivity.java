@@ -11,12 +11,10 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.matheus.mobshare.Model.Cliente;
 import com.example.matheus.mobshare.R;
-import com.example.matheus.mobshare.UploadImagem;
 import com.example.matheus.mobshare.Utils;
 import com.example.matheus.mobshare.presenter.CadastroClientePresenter;
 import com.example.matheus.mobshare.service.MobShareService;
@@ -85,11 +83,11 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
         String senha = txtSenha.getText().toString();
         String confSernha = txtConfSenha.getText().toString();
 
-//        if(nomeCliente.equals(" ") || emailCliente.equals(" ") || dtNasc.equals(" ") || senha.equals(" ") || confSernha.equals("")){
-//            Log.d("Erro", "Todos os campos precisam ser preenchidos");
-//            Toast.makeText(getApplication(),"Preencha todos os campos", Toast.LENGTH_LONG).show();
-//        }
-//        else{
+        if(nomeCliente.equals(" ") || emailCliente.equals(" ") || dtNasc.equals(" ") || senha.equals(" ") || confSernha.equals("")){
+            Log.d("Erro", "Todos os campos precisam ser preenchidos!");
+            Toast.makeText(getApplication(),"Preencha todos os campos!", Toast.LENGTH_LONG).show();
+        }
+        else{
             Cliente cliente = new Cliente();
             byte[] imgCadastro = Utils.toByteArray(imageBitmap);
             String img_src = Base64.encodeToString(imgCadastro, Base64.DEFAULT);
@@ -101,10 +99,8 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
             cliente.setConf_senha(confSernha);
             cliente.setDtNascimento(dtNasc);
 
-
-            Log.d("TESTE", String.valueOf(imgCadastro));
             presenter.CadastroClientePresenter(cliente);
-//        }
+        }
     }
 
 

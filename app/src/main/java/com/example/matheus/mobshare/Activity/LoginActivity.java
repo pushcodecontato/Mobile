@@ -66,4 +66,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
     }
 
+    @Override
+    public void salvarDados(Cliente cliente) {
+
+    }
+
 }

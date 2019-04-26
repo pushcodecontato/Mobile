@@ -11,10 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.matheus.mobshare.R;
-import com.example.matheus.mobshare.modelView.AnunciosView;
+import com.example.matheus.mobshare.Model.AnunciosView;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
