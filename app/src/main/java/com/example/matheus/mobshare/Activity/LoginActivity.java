@@ -25,6 +25,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     MobShareService service = ServiceFactoty.create();
     LoginPresenter presenter;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor  editor;
 
 
     @Override
@@ -35,6 +37,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
         txtEmail = findViewById(R.id.txtEmail);
         txtSenha = findViewById(R.id.txtSenha);
+
+        sharedPreferences = getSharedPreferences("LOGIN", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         presenter = new LoginPresenter((LoginView) this, service);
     }
@@ -75,20 +80,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
     @Override
     public void salvarDados(Cliente cliente) {
-        SharedPreferences sharedPreferences = getSharedPreferences("Usuario", MODE_PRIVATE);
-        SharedPreferences.Editor  editor = sharedPreferences.edit();
         editor.putInt("IdCliente", cliente.getId_cliente());
         editor.putString( "NomeCliente", cliente.getNome_cliente());
         editor.commit();
-
-        sharedPreferences = getSharedPreferences("NomeCliente", MODE_PRIVATE);
-        String nome_cliente = sharedPreferences.getString("NomeCliente", null);
-        if(nome_cliente != null){
-            Toast.makeText(this,nome_cliente, Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(this,"VAZIO", Toast.LENGTH_LONG).show();
-        }
-
     }
 
 }

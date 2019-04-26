@@ -1,6 +1,7 @@
 package com.example.matheus.mobshare.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,6 +29,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    private SharedPreferences sharedPreferences_home;
+    private SharedPreferences.Editor editor_home;
+
+    TextView txtNomeCliente, txtAvaliacao;
+    ImageView imgCliente;
+
+
     FragmentManager fm;
     AnuncioAdapter anuncioAdapter;
 
@@ -34,7 +44,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        txtNomeCliente.findViewById(R.id.txtNomeUsuario);
+        txtAvaliacao.findViewById(R.id.txtAvaliacao);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,6 +59,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         fm = getSupportFragmentManager();
         anuncioAdapter = new AnuncioAdapter(this);
+
+        sharedPreferences_home = getSharedPreferences("LOGIN", MODE_PRIVATE);
+        editor_home =  sharedPreferences_home.edit();
+
+        mostrarDados();
     }
 
 
@@ -55,7 +71,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem Item) {
         switch (Item.getItemId()) {
             case R.id.nav_anuncios: {
-
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.frame_layout, new FragmentsAnuncios());
                 ft.commit();
@@ -84,5 +99,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void mostrarDados(){
+        String nomeCliente = sharedPreferences_home.getString("NomeCliente", "null");
+        Integer idCliente = sharedPreferences_home.getInt("IdCliente", 0);
+        txtNomeCliente.setText(nomeCliente);
+        Log.d("TESTE: ", String.valueOf(idCliente));
+
     }
 }
