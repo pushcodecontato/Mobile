@@ -141,7 +141,7 @@ app.post("/login", (req, res) => {
                 console.log(result);
             }
             else{
-                res.send({"sucesso" : false, "mensagem" : "Email ou senha incorreto."});
+                res.send(result);
             }
         }
     });

@@ -2,6 +2,7 @@ package com.example.matheus.mobshare.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,14 +18,20 @@ import com.example.matheus.mobshare.service.MobShareService;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.LoginView;
 
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity implements LoginView{
     EditText txtEmail, txtSenha;
     MobShareService service = ServiceFactoty.create();
     LoginPresenter presenter;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         txtEmail = findViewById(R.id.txtEmail);
         txtSenha = findViewById(R.id.txtSenha);
@@ -42,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         String senha = txtSenha.getText().toString();
 
         if(email.equals("") || senha.equals("")){
-            Toast.makeText(getApplicationContext(), "Preencha todos os campos, FILHO DA PUTA!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Preencha todos os campos.",Toast.LENGTH_LONG).show();
         }
         else{
             Cliente cliente = new Cliente();
@@ -68,6 +75,19 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
     @Override
     public void salvarDados(Cliente cliente) {
+        SharedPreferences sharedPreferences = getSharedPreferences("Usuario", MODE_PRIVATE);
+        SharedPreferences.Editor  editor = sharedPreferences.edit();
+        editor.putInt("IdCliente", cliente.getId_cliente());
+        editor.putString( "NomeCliente", cliente.getNome_cliente());
+        editor.commit();
+
+        sharedPreferences = getSharedPreferences("NomeCliente", MODE_PRIVATE);
+        String nome_cliente = sharedPreferences.getString("NomeCliente", null);
+        if(nome_cliente != null){
+            Toast.makeText(this,nome_cliente, Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this,"VAZIO", Toast.LENGTH_LONG).show();
+        }
 
     }
 

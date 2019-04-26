@@ -7,5 +7,5 @@ import java.util.List;
 public interface LoginView {
     void showMessage(boolean autenticar, String msg);
 
-    void salvarDados(List cliente);
+    void salvarDados(Cliente cliente);
 }

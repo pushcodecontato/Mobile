@@ -24,7 +24,7 @@ public class LoginPresenter {
         this.mobShareService = mobShareService;
     }
     public void LoginPresenter(Cliente cliente){
-       MobShareService service = ServiceFactoty.create();
+        MobShareService service = ServiceFactoty.create();
 
        Call<List<Cliente>> call = service.loginCliente(cliente);
 
@@ -32,21 +32,18 @@ public class LoginPresenter {
            @Override
            public void onResponse(Call<List<Cliente>> call, Response<List<Cliente>> response) {
                List<Cliente> cliente = response.body();
-               if(!cliente.isEmpty()){
-                   loginView.showMessage(true, "Login efetuado com sucesso.");
-                   loginView.salvarDados(cliente);
+               if(cliente.isEmpty()){
+                   loginView.showMessage(false,"Usuário não encontrado, verificar email e senha!");
+                   Log.d("ERRO: ", "USUARIO NÃO ENCONTRADO");
                }else{
-                   Log.d("OIA", "ARROZ");
+                   loginView.showMessage(true,"Login efetuado com sucesso");
+                   loginView.salvarDados(cliente.get(0));
                }
 
-
-
-
            }
-
            @Override
            public void onFailure(Call<List<Cliente>> call, Throwable t) {
-               Log.d("OIA", "ARROZ COM FEIJÃO?");
+               Log.d("ERRO: ", t.getMessage());
            }
        });
     }
