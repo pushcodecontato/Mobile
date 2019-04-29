@@ -13,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,8 +35,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private SharedPreferences sharedPreferences_home;
     private SharedPreferences.Editor editor_home;
 
-    TextView txtNomeCliente, txtAvaliacao;
-    ImageView imgCliente;
+
+//    TextView txtNomeCliente, txtAvaliacao;
+    private ImageView imgCliente;
 
 
     FragmentManager fm;
@@ -44,8 +48,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        txtNomeCliente.findViewById(R.id.txtNomeUsuario);
-        txtAvaliacao.findViewById(R.id.txtAvaliacao);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.nav_header, null);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,10 +67,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         sharedPreferences_home = getSharedPreferences("LOGIN", MODE_PRIVATE);
         editor_home =  sharedPreferences_home.edit();
 
-        mostrarDados();
+        TextView txtNomeCliente = v.findViewById(R.id.txtNomeUsuario);
+        TextView txtAvaliacao = v.findViewById(R.id.txtAvaliacao);
+
+        String nomeCliente = sharedPreferences_home.getString("NomeCliente", "null");
+//        Integer idCliente = sharedPreferences_home.getInt("IdCliente", 0);
+
+        Log.d("TESTE: ", nomeCliente);
+        txtNomeCliente.setText(nomeCliente);
     }
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem Item) {
         switch (Item.getItemId()) {
@@ -99,12 +108,5 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
-    }
-    public void mostrarDados(){
-        String nomeCliente = sharedPreferences_home.getString("NomeCliente", "null");
-        Integer idCliente = sharedPreferences_home.getInt("IdCliente", 0);
-        txtNomeCliente.setText(nomeCliente);
-        Log.d("TESTE: ", String.valueOf(idCliente));
-
     }
 }

@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.matheus.mobshare.Activity.FiltroActivity;
 import com.example.matheus.mobshare.Activity.VisualizarActivityView;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
@@ -29,6 +32,7 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
 
     ListView lstAnuncios;
     ListaAnuncioPresenter listaPresenter;
+    ImageView btnAbrirFiltro;
 
     public FragmentsAnuncios(){}
 
@@ -44,6 +48,8 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
         View v = inflater.inflate(R.layout.fragment_lista_anuncios,container, false);
 
         lstAnuncios = v.findViewById(R.id.lstAnuncios);
+        btnAbrirFiltro = v.findViewById(R.id.btnAbrirFiltro);
+
         anuncioAdapter = new AnuncioAdapter(getContext());
 
         lstAnuncios.setAdapter(anuncioAdapter);
@@ -52,7 +58,15 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
 
         listaPresenter = new ListaAnuncioPresenter(this, ServiceFactoty.create());
 
+        btnAbrirFiltro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FiltroActivity.class);
+                startActivity(intent);
+            }
+        });
         return v;
+
     }
 
     @Override

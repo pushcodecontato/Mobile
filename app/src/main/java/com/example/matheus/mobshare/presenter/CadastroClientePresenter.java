@@ -21,6 +21,7 @@ public class CadastroClientePresenter {
         this.mobShareService = mobShareService;
     }
     public void CadastroClientePresenter(Cliente cliente){
+        cadastroClienteView.exibirProgresso();
         mobShareService.cadastrarCliente(cliente).enqueue(new Callback<ApiResult>() {
             @Override
             public void onResponse(Call<ApiResult> call, Response<ApiResult> response) {
@@ -28,10 +29,12 @@ public class CadastroClientePresenter {
                 if(result.isSucesso()){
                     Log.d("Sucesso", result.getMensagem() + result.getAviso());
                     cadastroClienteView.showMessageSucesso("Sucesso", result.getMensagem(), result.getAviso());
+                    cadastroClienteView.escoderProgresso();
                 }
                 else{
                     Log.d("Erro", result.getMensagem() + result.getAviso());
                     cadastroClienteView.showMessageFailed("Erro", result.getMensagem());
+                    cadastroClienteView.escoderProgresso();
                 }
             }
 

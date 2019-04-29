@@ -24,6 +24,7 @@ Animation animation;
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
+                finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fade_out);
                 onStop();
             }

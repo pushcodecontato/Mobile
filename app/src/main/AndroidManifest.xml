@@ -26,6 +26,7 @@
         <activity android:name=".Activity.HomeActivity"></activity>
         <activity android:name=".Activity.ListaAnunciosActivity"></activity>
         <activity android:name=".Activity.VisualizarActivityView"></activity>
+        <activity android:name=".Activity.FiltroActivity"></activity>
     </application>
 
 </manifest>

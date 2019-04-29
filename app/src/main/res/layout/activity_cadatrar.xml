@@ -4,26 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.activity.CadatrarActivity"
+    tools:context=".Activity.CadastroActivity"
     android:background="@color/verde_site"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
     >
+    <ProgressBar
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:progress="80"
+        android:theme="@style/AppTheme.WhiteAccent"
 
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/cadastro_radius"
         android:orientation="vertical"
-
+        android:id="@+id/layoutCadastro"
+        android:visibility="visible"
         >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -45,7 +55,7 @@
                 android:id="@+id/txtNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="15dp"
                 android:hint="Nome"
                 />
 
@@ -53,31 +63,32 @@
                 android:id="@+id/txtEmailCadastro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="15dp"
                 android:hint="Email" />
 
             <EditText
                 android:id="@+id/txtDtNasc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="15dp"
                 android:hint="Data nascimento" />
 
             <EditText
                 android:id="@+id/txtSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="15dp"
                 android:hint="Senha"
+                android:inputType="textPassword"
 
                 />
             <EditText
                 android:id="@+id/txtConfSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="35dp"
                 android:hint="Confirmar Senha"
-
+                android:inputType="textPassword"
                 />
 
             <Button

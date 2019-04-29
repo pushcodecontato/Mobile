@@ -6,4 +6,7 @@ public interface CadastroClienteView {
 
     void showMessageFailed(String titulo, String mensagem);
 
+    void exibirProgresso();
+    void escoderProgresso();
+
 }

@@ -4,13 +4,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.matheus.mobshare.Model.Cliente;
@@ -36,8 +42,11 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
     Bitmap imageBitmap;
     StringBuilder nomeImagem = new StringBuilder();
     byte[] imgCadastro;
+    ProgressBar loading;
+    LinearLayout layoutCadastro;
 
     int COD_GALERIA = 1;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +58,8 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
         txtSenha = findViewById(R.id.txtSenha);
         txtConfSenha = findViewById(R.id.txtConfSenha);
         imgCliente = findViewById(R.id.imgCadastro);
+        loading = findViewById(R.id.progressBar);
+        layoutCadastro = findViewById(R.id.layoutCadastro);
 
         presenter = new CadastroClientePresenter((CadastroClienteView) this,service);
     }
@@ -87,6 +98,9 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
             Log.d("Erro", "Todos os campos precisam ser preenchidos!");
             Toast.makeText(getApplication(),"Preencha todos os campos!", Toast.LENGTH_LONG).show();
         }
+        else if(imageBitmap ==  null){
+            Toast.makeText(getApplication(),"Insira uma imagem para teriminar o cadastro.", Toast.LENGTH_LONG).show();
+        }
         else{
             Cliente cliente = new Cliente();
             byte[] imgCadastro = Utils.toByteArray(imageBitmap);
@@ -100,6 +114,13 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
             cliente.setDtNascimento(dtNasc);
 
             presenter.CadastroClientePresenter(cliente);
+
+            txtNome.setText("");
+            txtEmailCadastro.setText("");
+            txtSenha.setText("");
+            txtConfSenha.setText("");
+            txtDtNasc.setText("");
+            imgCliente.setImageResource(R.drawable.camera);
         }
     }
 
@@ -116,6 +137,7 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         alert.setNegativeButton("Voltar", new DialogInterface.OnClickListener() {
@@ -123,6 +145,7 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         alert.show();
@@ -132,5 +155,17 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
     public void showMessageFailed(String titulo, String mensagem) {
         Toast.makeText(getApplication(),mensagem,Toast.LENGTH_LONG).show();
         Log.d(titulo, mensagem);
+    }
+
+    @Override
+    public void exibirProgresso() {
+        loading.setVisibility(View.VISIBLE);
+        layoutCadastro.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void escoderProgresso() {
+        loading.setVisibility(View.GONE);
+        layoutCadastro.setVisibility(View.VISIBLE);
     }
 }

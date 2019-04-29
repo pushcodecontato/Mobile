@@ -89,7 +89,7 @@ app.post("/register",async (req, res) => {
     
     fs.appendFile(imgCliente, imagemBinary , function(erro){
 		if(erro) throw erro
-			console.log("OI " + erro);
+			console.log("ERRO AO CARREGAR IMAGEM: " + erro);
 	});
 	
 
@@ -112,11 +112,15 @@ app.post("/register",async (req, res) => {
             sql = `INSERT INTO tbl_cliente (foto_cliente, nome_cliente, email, dt_nascimento, senha) VALUES ("${imgCliente}", "${nome}", "${email_cliente}", "${dt_nasc}", "${senha}")`;
             mysqlConnection.query(sql, function (erro, result, field){
                 if(!erro){
-                    res.send({"sucesso": true, 
+					const setTime = setInterval(() => {
+						res.send({"sucesso": true, 
                             "mensagem" : "Cliente inserido com sucesso",
                             "aviso" : "Termine seu cadastro em nosso site da Mob'Share para anunciar!"});
-                            
-                }else{
+                            	
+					},1500);
+                    
+                
+				}else{
                     res.send({"erro": erro}); 
                     console.log(erro);
                 }
@@ -141,11 +145,12 @@ app.post("/login", (req, res) => {
                 console.log(result);
             }
             else{
-                res.send(result);
+                res.send({"sucesso" : false, "mensagem" : "Email ou senha incorreto."});
             }
         }
     });
 })
+// APENAS TESTE
 app.get("/cliente", (req, res) => {
     const sql = "SELECT * FROM tbl_cliente";
 
@@ -161,6 +166,20 @@ app.get("/cliente", (req, res) => {
     });
 });
 
+app.get("/tipo_veiculo", (req,res) => {
+	const sql = "SELECT * FROM tbl_tipo_veiculo";
+	
+	mysqlConnection.query(sql, function (erro, result, field){
+        if(erro){
+            res.send(erro);
+            console.log("erro: " + sql);
+        }
+        else{
+            res.send(result);
+            console.log(result);            
+        } 
+    });
+});
 
 //pegando conexao na porta 5001
 http.listen(5001, () => {

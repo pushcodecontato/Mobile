@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/verde_site</item>
         <item name="colorPrimaryDark">@color/verde_escuro</item>
         <item name="colorAccent">@color/verde_site</item>
+
+
+    </style>
+    <style name="AppTheme.WhiteAccent">
+        <item name="colorAccent">@color/white</item> <!-- Whatever color you want-->
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />

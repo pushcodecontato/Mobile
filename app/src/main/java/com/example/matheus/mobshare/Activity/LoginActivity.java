@@ -42,6 +42,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         editor = sharedPreferences.edit();
 
         presenter = new LoginPresenter((LoginView) this, service);
+
+        if(sharedPreferences.contains("editor")){
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void cadastrar_conta(View v){
@@ -72,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             Toast.makeText(getApplicationContext(), mensagem,Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
+            onDestroy();
         }else{
             Toast.makeText(getApplicationContext(), mensagem,Toast.LENGTH_LONG).show();
         }
@@ -82,7 +89,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     public void salvarDados(Cliente cliente) {
         editor.putInt("IdCliente", cliente.getId_cliente());
         editor.putString( "NomeCliente", cliente.getNome_cliente());
+        editor.putString("EmailCliente", cliente.getEmail_cliente());
+        editor.putString("FotoCliente", cliente.getFoto_cliente());
         editor.commit();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
