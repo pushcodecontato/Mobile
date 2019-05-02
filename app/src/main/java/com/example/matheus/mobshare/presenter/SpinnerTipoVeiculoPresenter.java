@@ -1,12 +1,13 @@
 package com.example.matheus.mobshare.presenter;
 
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.example.matheus.mobshare.Model.TipoVeiculo;
 import com.example.matheus.mobshare.service.MobShareService;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.CarregarSpinnersView;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,22 +26,20 @@ public class SpinnerTipoVeiculoPresenter {
     public void SpinnerTipoVeiculo(){
        MobShareService service = ServiceFactoty.create();
 
-       Call<ArrayAdapter<TipoVeiculo>> call = service.carregarSpinnerTipoVeiculo();
+        Call<List<TipoVeiculo>> call =  service.carregarSpinnerTipoVeiculo();
 
-       call.enqueue(new Callback<ArrayAdapter<TipoVeiculo>>() {
-           @Override
-           public void onResponse(Call<ArrayAdapter<TipoVeiculo>> call, Response<ArrayAdapter<TipoVeiculo>> response) {
-               ArrayAdapter<TipoVeiculo> tipoVeiculo = response.body();
-               carregarSpinnersView.carregarTipoVeiculo(tipoVeiculo);
-               Log.d("TESTE: ", "Tipos de veiculos carregados");
-           }
+        call.enqueue(new Callback<List<TipoVeiculo>>() {
+            @Override
+            public void onResponse(Call<List<TipoVeiculo>> call, Response<List<TipoVeiculo>> response) {
+                List<TipoVeiculo> tipoVeiculos = response.body();
+                carregarSpinnersView.carregarTipoVeiculo(tipoVeiculos);
+                Log.d("TESTE DO SPINNER", tipoVeiculos.get(0).getNome_tipo_veiculo());
+            }
 
-           @Override
-           public void onFailure(Call<ArrayAdapter<TipoVeiculo>> call, Throwable t) {
-               Log.d("TESTE: ", "Tipos de veiculos carregados");
-               Log.d("ERRO2: ", String.valueOf(t));
-           }
-
-       });
+            @Override
+            public void onFailure(Call<List<TipoVeiculo>> call, Throwable t) {
+                Log.d("TESTE DO SPINNER ERRO: ", String.valueOf(t));
+            }
+        });
     }
 }

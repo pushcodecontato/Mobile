@@ -20,7 +20,7 @@ import java.util.List;
 
 public class FiltroActivity extends AppCompatActivity implements CarregarSpinnersView{
 
-    Spinner spTipoVeiculo;
+    private Spinner spTipoVeiculo;
     MobShareService service = ServiceFactoty.create();
     SpinnerTipoVeiculoPresenter presenter;
 
@@ -35,14 +35,13 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
 
         presenter.SpinnerTipoVeiculo();
     }
-
     @Override
-    public void carregarTipoVeiculo(ArrayAdapter<TipoVeiculo> tipoVeiculo) {
-        ArrayAdapter<TipoVeiculo> arrayAdapter = new ArrayAdapter<TipoVeiculo>(this, R.layout.support_simple_spinner_dropdown_item, (List<TipoVeiculo>) tipoVeiculo);
-
+    public void carregarTipoVeiculo(List<TipoVeiculo> tipoVeiculo) {
+        ArrayAdapter<TipoVeiculo> arrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, tipoVeiculo);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
 
         spTipoVeiculo.setAdapter(arrayAdapter);
+
         spTipoVeiculo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -57,11 +56,15 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
     }
 
 
+
     public void preencheSpinner(){
-        String nome = (String)spTipoVeiculo.getSelectedItem();
+        String nome = String.valueOf(spTipoVeiculo.getSelectedItem());
         long id = spTipoVeiculo.getSelectedItemId();
         int position = spTipoVeiculo.getSelectedItemPosition();
 
-        Toast.makeText(this, nome,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, nome + id + position,Toast.LENGTH_LONG).show();
     }
+
+
+
 }

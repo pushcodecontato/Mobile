@@ -1,11 +1,11 @@
 package com.example.matheus.mobshare.view;
 
-import android.widget.ArrayAdapter;
-
 import com.example.matheus.mobshare.Model.TipoVeiculo;
+
+import java.util.List;
 
 public interface CarregarSpinnersView {
 
-    void carregarTipoVeiculo(ArrayAdapter<TipoVeiculo> tipoVeiculo);
+    void carregarTipoVeiculo(List<TipoVeiculo> tipoVeiculo);
 
 }

@@ -1,10 +1,8 @@
 package com.example.matheus.mobshare.service;
 
-import android.widget.ArrayAdapter;
-
+import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.Model.ApiResult;
 import com.example.matheus.mobshare.Model.Cliente;
-import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.Model.TipoVeiculo;
 
 import java.util.List;
@@ -34,5 +32,5 @@ public interface MobShareService {
     Call<List<Cliente>> loginCliente(@Body Cliente cliente);
 
     @GET("/tipoVeiculo")
-    Call <ArrayAdapter<TipoVeiculo>> carregarSpinnerTipoVeiculo();
+    Call <List<TipoVeiculo>> carregarSpinnerTipoVeiculo();
 }
