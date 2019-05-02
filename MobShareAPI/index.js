@@ -111,15 +111,10 @@ app.post("/register",async (req, res) => {
         }else{
             sql = `INSERT INTO tbl_cliente (foto_cliente, nome_cliente, email, dt_nascimento, senha) VALUES ("${imgCliente}", "${nome}", "${email_cliente}", "${dt_nasc}", "${senha}")`;
             mysqlConnection.query(sql, function (erro, result, field){
-                if(!erro){
-					const setTime = setInterval(() => {
-						res.send({"sucesso": true, 
-                            "mensagem" : "Cliente inserido com sucesso",
-                            "aviso" : "Termine seu cadastro em nosso site da Mob'Share para anunciar!"});
-                            	
-					},1500);
-                    
-                
+                if(!erro){				
+					res.send({"sucesso": true, 
+						"mensagem" : "Cliente inserido com sucesso",
+						"aviso" : "Termine seu cadastro em nosso site da Mob'Share para anunciar!"});
 				}else{
                     res.send({"erro": erro}); 
                     console.log(erro);
@@ -166,8 +161,23 @@ app.get("/cliente", (req, res) => {
     });
 });
 
-app.get("/tipo_veiculo", (req,res) => {
+app.get("/tipoVeiculo", (req,res) => {
 	const sql = "SELECT * FROM tbl_tipo_veiculo";
+	
+	mysqlConnection.query(sql, function (erro, result, field){
+        if(erro){
+            res.send(erro);
+            console.log("erro: " + sql);
+        }
+        else{
+            res.send(result);
+            console.log(result);            
+        } 
+    });
+});
+app.get("/tipoVeiculo/marca/:id_tipoVeiculo", (req, res) => {
+		let id_tipo_marca = parseInt(req.params.id_tipoVeiculo);
+		const sql = `SELECT id_marca_veiculo, nome_marca FROM view_tipo_marca where id_tipo_veiculo = "${id_tipo_marca}"`;
 	
 	mysqlConnection.query(sql, function (erro, result, field){
         if(erro){

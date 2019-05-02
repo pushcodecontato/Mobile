@@ -3,6 +3,7 @@ package com.example.matheus.mobshare.service;
 import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.Model.ApiResult;
 import com.example.matheus.mobshare.Model.Cliente;
+import com.example.matheus.mobshare.Model.MarcaVeiculo;
 import com.example.matheus.mobshare.Model.TipoVeiculo;
 
 import java.util.List;
@@ -16,8 +17,8 @@ import retrofit2.http.Path;
 public interface MobShareService {
 
 //    String URL_BASE = "http://10.0.2.2:5001";
-//    String URL_BASE = "http://192.168.43.123:5001";
-    String URL_BASE = "http://192.168.0.107:5001";
+    String URL_BASE = "http://192.168.43.123:5001";
+//    String URL_BASE = "http://192.168.0.107:5001";
 
     @GET("/anuncios")
     Call<List<AnunciosView>> obterAnuncios();
@@ -33,4 +34,7 @@ public interface MobShareService {
 
     @GET("/tipoVeiculo")
     Call <List<TipoVeiculo>> carregarSpinnerTipoVeiculo();
+
+    @GET("/tipoVeiculo/marca/{id}")
+    Call<List<MarcaVeiculo>> carregarSpinnerMarcaVeiculo(@Path("id") int id_tipo_veiculo);
 }
