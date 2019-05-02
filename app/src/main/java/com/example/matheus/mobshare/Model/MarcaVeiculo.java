@@ -22,7 +22,9 @@ public class MarcaVeiculo {
         this.nome_marca = nome_marca;
     }
 
-    public String toString(String nome_marca){
-        return  nome_marca;
+
+    @Override
+    public String toString() {
+        return this.nome_marca;
     }
 }

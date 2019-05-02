@@ -85,43 +85,10 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
         });
     }
 
-//    class AdapterMarca extends ArrayAdapter<MarcaVeiculo> {
+//    public void preencheSpinner(Integer id_tipo){
+//        String nome = String.valueOf(spTipoVeiculo.getSelectedItem());
 //
-//        private Context context;
-//        private ArrayList<MarcaVeiculo> items;
-//
-//        public AdapterMarca(Context ctx, List<MarcaVeiculo> lista) {
-//            super(ctx, R.layout.item_spinner, lista);
-//
-//            this.context = context;
-//            items = (ArrayList<MarcaVeiculo>) lista;
-//
-//        }
-//
-//
-//        @NonNull
-//        @Override
-//        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//            View v = convertView;
-//            if(v == null){
-//                v = LayoutInflater.from(getContext()).inflate(R.layout.item_spinner,parent,false);
-//            }
-//             MarcaVeiculo marcaVeiculo = getItem(position);
-//
-//
-//
-//            TextView nome_marca = (TextView) v.findViewById(R.id.nome_marca_spiner);
-//
-//            nome_marca.setText(marcaVeiculo.getNome_marca());
-//
-//
-//            return v;
-//        }
 //    }
-////    public void preencheSpinner(Integer id_tipo){
-////        String nome = String.valueOf(spTipoVeiculo.getSelectedItem());
-////
-////    }
 
 
 
