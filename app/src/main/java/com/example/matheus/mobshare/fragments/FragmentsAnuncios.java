@@ -5,20 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.matheus.mobshare.Activity.FiltroActivity;
-import com.example.matheus.mobshare.Activity.VisualizarActivityView;
+import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
-import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.presenter.ListaAnuncioPresenter;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.ListaAnuncioView;
@@ -33,6 +32,7 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
     ListView lstAnuncios;
     ListaAnuncioPresenter listaPresenter;
     ImageView btnAbrirFiltro;
+
 
     public FragmentsAnuncios(){}
 
@@ -84,10 +84,18 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         AnunciosView anunciosView = anuncioAdapter.getItem(position);
+        Bundle bundle = new Bundle();
 
-        Intent intent = new Intent(getContext(), VisualizarActivityView.class);
-        intent.putExtra("id_anuncio", anunciosView.getId_anuncio());
-        startActivity(intent);
-        Log.d("Id", String.valueOf(anunciosView.getId_anuncio()));
+        Fragment fragment = new FragmentListarAnuncios();
+        bundle.putInt("id_anuncio", anunciosView.getId_anuncio());
+        fragment.setArguments(bundle);
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frame_layout, fragment);
+        ft.addToBackStack("pilha");
+        ft.commit();
     }
+
+
 }

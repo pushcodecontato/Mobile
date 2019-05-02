@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
 import com.example.matheus.mobshare.fragments.FragmentsAnuncios;
+import com.squareup.picasso.Picasso;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     
@@ -36,7 +37,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private SharedPreferences.Editor editor_home;
 
 
-//    TextView txtNomeCliente, txtAvaliacao;
+    TextView txtNomeCliente, txtAvaliacao;
     private ImageView imgCliente;
 
 
@@ -48,8 +49,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.nav_header, null);
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,20 +61,29 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerView = navigationView.getHeaderView(0);
+
         fm = getSupportFragmentManager();
         anuncioAdapter = new AnuncioAdapter(this);
 
         sharedPreferences_home = getSharedPreferences("LOGIN", MODE_PRIVATE);
         editor_home =  sharedPreferences_home.edit();
 
-        TextView txtNomeCliente = v.findViewById(R.id.txtNomeUsuario);
-        TextView txtAvaliacao = v.findViewById(R.id.txtAvaliacao);
+        txtNomeCliente = (TextView) headerView.findViewById(R.id.txtNomeUsuarioNav);
+        TextView txtAvaliacao = headerView.findViewById(R.id.txtAvaliacao);
+        imgCliente = headerView.findViewById(R.id.imgCliente);
 
         String nomeCliente = sharedPreferences_home.getString("NomeCliente", "null");
 //        Integer idCliente = sharedPreferences_home.getInt("IdCliente", 0);
+        String fotoCliente = sharedPreferences_home.getString("FotoCliente", "null");
 
-        Log.d("TESTE: ", nomeCliente);
+        String url_foto = "http://192.168.0.107/mobshareapi/"+fotoCliente;
+
+
+        Log.d("TESTE: ", url_foto);
         txtNomeCliente.setText(nomeCliente);
+        Picasso.get().load(url_foto).into(imgCliente);
+
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem Item) {
@@ -100,6 +109,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Log.d("TESTE!", "Menu4 ");
                 break;
             }
+            case R.id.nav_item_logout: {
+                sharedPreferences_home.edit().clear().commit();
+                verificar_login();
+                Log.d("TESTE!", "FAZENDO LOGOUT ");
+                break;
+            }
             default: {
                 Toast.makeText(this, "Menu Default", Toast.LENGTH_SHORT).show();
                 Log.d("TESTE!", "Menu5 ");
@@ -108,5 +123,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void verificar_login(){
+        if(sharedPreferences_home.contains("IdCliente")){
+            Log.d("TESTE: ", "HOMEACTIVITY");
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            Log.d("TESTE: ", "LOGINACTIVITY" +
+                    "");
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

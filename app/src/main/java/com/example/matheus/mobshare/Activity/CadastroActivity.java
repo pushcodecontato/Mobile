@@ -132,15 +132,7 @@ public class CadastroActivity extends Activity implements CadastroClienteView{
         alert.setTitle(titulo);
         alert.setMessage(mensagem + "\n\n" + aviso);
 
-        alert.setPositiveButton("Logar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        alert.setNegativeButton("Voltar", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton("Fazer login", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

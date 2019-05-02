@@ -38,7 +38,7 @@ public class AnuncioAdapter extends ArrayAdapter<AnunciosView> {
 
 
         ImageView img_veiculo = v.findViewById(R.id.img_veiculo);
-        String url_foto = "http://192.168.0.107/mobshare/ImagensCar/hb20.jpg";
+        String url_foto = "http://192.168.43.123/mobshare/ImagensCar/hb20.jpg";
         Picasso.get().load(url_foto).into(img_veiculo);
 
         txtNome_veiculo.setText(anunciosView.getNome_marca() + " " + anunciosView.getNome_modelo());

@@ -43,11 +43,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
         presenter = new LoginPresenter((LoginView) this, service);
 
-        if(sharedPreferences.contains("editor")){
-            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-            startActivity(intent);
-            finish();
-        }
+
     }
 
     public void cadastrar_conta(View v){
@@ -92,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         editor.putString("EmailCliente", cliente.getEmail_cliente());
         editor.putString("FotoCliente", cliente.getFoto_cliente());
         editor.commit();
+        Log.d("TESTE", cliente.getFoto_cliente());
     }
 
     @Override
