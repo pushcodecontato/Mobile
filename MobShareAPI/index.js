@@ -24,7 +24,7 @@ app.use(session({
 const mysqlConnection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "bcd127",
+    password: "",
     database: "mob_share"
 });
 
@@ -39,8 +39,22 @@ app.get("/", (req, res) => {
     res.send("Bem Vindo a API da Mob'Share!")
 })
 //Listar todos os anuncios
-app.get("/anuncios", (req, res) => {
-	sql = "SELECT * FROM view_anuncios";
+app.post("/anuncios", (req, res) => {
+    
+    let id_tipo_veiculo = req.body.id_tipo_veiculo;
+    let id_tipo_marca = req.body.id_tipo_marca;
+    let id_modelo = req.body.id_modelo;
+    
+
+    if(id_tipo_veiculo > 0 && id_tipo_marca > 0 && id_modelo > 0)
+        sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo} AND id_tipo_marca = ${id_tipo_marca} AND id_modelo = ${id_modelo}`;
+    else if(id_tipo_veiculo > 0 && id_tipo_marca > 0)
+        sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo} AND id_tipo_marca = ${id_tipo_marca}`;
+    else if(id_tipo_veiculo > 0)
+        sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo}`;
+    else
+        sql = `SELECT * FROM view_anuncios`;
+    
 
     mysqlConnection.query(sql, function (erro, result, field){
         if(erro){
@@ -86,14 +100,8 @@ app.post("/register",async (req, res) => {
 
     var dt_nasc = ano + "-" + mes + "-" + dia
 	
-	var imagemBinary = new Buffer(img_cliente64, 'base64');
-	var imgCliente = "img/" + uniqid() + ".jpg";
-    
-    fs.appendFile(imgCliente, imagemBinary , function(erro){
-		if(erro) throw erro
-			console.log("ERRO AO CARREGAR IMAGEM: " + erro);
-	});
 	
+    
 
     //Primeira consulta para verificar se o email existe
     sql = `SELECT count(*) as linhas FROM tbl_cliente WHERE email ="${email_cliente}"`;
@@ -117,6 +125,7 @@ app.post("/register",async (req, res) => {
 					res.send({"sucesso": true, 
 						"mensagem" : "Cliente inserido com sucesso",
 						"aviso" : "Termine seu cadastro em nosso site da Mob'Share para anunciar!"});
+                        salvarImagem(img_cliente64);
 				}else{
                     res.send({"erro": erro}); 
                     console.log(erro);
@@ -127,6 +136,7 @@ app.post("/register",async (req, res) => {
 	
         
 });
+
 app.post("/login", (req, res) => {
     
     const email = req.body.email_cliente;
@@ -167,7 +177,7 @@ app.get("/cliente", (req, res) => {
 });
 
 app.get("/tipoVeiculo", (req,res) => {
-	sql = "SELECT * FROM tbl_tipo_veiculo";
+	sql = "SELECT * FROM tbl_tipo_veiculo WHERE excluido = 0";
 	let result_res = [];
 	result_res.push({"id_tipo_veiculo":0,"nome_tipo_veiculo":"Selecione","excluido":0})
 	mysqlConnection.query(sql, function (erro, result, field){
@@ -185,12 +195,12 @@ app.get("/tipoVeiculo", (req,res) => {
     });
 });
 app.get("/tipoVeiculo/marca/:id_tipoVeiculo", (req, res) => {
-		let id_tipo_marca = parseInt(req.params.id_tipoVeiculo);
+		let id_tipo_veiculo = parseInt(req.params.id_tipoVeiculo);
 		
-		if(id_tipo_marca >=1){
-			sql = `SELECT id_marca_veiculo, nome_marca FROM view_tipo_marca where id_tipo_veiculo = "${id_tipo_marca}"`;
+		if(id_tipo_veiculo >=1){
+			sql = `SELECT * FROM view_tipo_marca where id_tipo_veiculo = "${id_tipo_veiculo}"`;
 		}else{
-			sql = `SELECT id_marca_veiculo, nome_marca FROM tbl_marca_veiculo`;
+			sql = `SELECT * FROM tbl_marca_veiculo`;
 		}
 		
 	
@@ -205,6 +215,36 @@ app.get("/tipoVeiculo/marca/:id_tipoVeiculo", (req, res) => {
         } 
     });
 });
+app.get("/tipoVeiculo/marca/modelo/:id_tipo_marca", (req, res) => {
+    let id_tipo_marca = parseInt(req.params.id_tipo_marca);
+
+    if(id_tipo_marca >=1){
+        sql = `SELECT * FROM tbl_modelo_veiculo as modelo where id_marca_tipo = "${id_tipo_marca}"`;
+    }else{
+        sql = `SELECT * FROM tbl_modelo_veiculo as modelo`;
+    }
+    mysqlConnection.query(sql, function (erro, result, field){
+        if(erro){
+            res.send(erro);
+            console.log("erro: " + sql);
+        }
+        else{
+            res.send(result);
+            console.log(result);            
+        } 
+    });
+});
+
+function salvarImagem(img_cliente64){
+    var imagemBinary = new Buffer(img_cliente64, 'base64');
+    var imgCliente = "img/" + uniqid() + ".jpg";
+    
+	fs.appendFile(imgCliente, imagemBinary , function(erro){
+		if(erro) throw erro
+			console.log("ERRO AO CARREGAR IMAGEM: " + erro);
+    });
+    
+}
 
 //pegando conexao na porta 5001
 http.listen(5001, () => {
