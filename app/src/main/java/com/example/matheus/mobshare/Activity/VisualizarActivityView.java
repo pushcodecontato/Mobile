@@ -47,15 +47,15 @@ public class VisualizarActivityView extends AppCompatActivity implements Visuali
     public void CarregarAnuncioPorId(AnunciosView anunciosView) {
 
         txtNomeVeiculoHeader.setText(anunciosView.getNome_modelo());
-        txtValorHora.setText("R$ " + anunciosView.getPreco() + "/h");
-        txtTipoVeiculo.setText(anunciosView.getTipo_veiculo());
+        txtValorHora.setText("R$ " + anunciosView.getValor_hora() + "/h");
+        txtTipoVeiculo.setText(anunciosView.getNome_tipo_veiculo());
         txtNomeVeiculo.setText(anunciosView.getNome_marca() + " " + anunciosView.getNome_modelo() );
 //        txtAvaliacao = findViewById(R.id.txtAvaliacao);
 //        txtNumPessoas = findViewById(R.id.txtNumPessoas);
         txtMarca.setText(anunciosView.getNome_marca());
         txtModeloVeiculo.setText(anunciosView.getNome_modelo());
         txtAnoVeiculo.setText(anunciosView.getAno());
-        txtQuilometragem.setText(anunciosView.getQuilomentragem());
+        txtQuilometragem.setText(anunciosView.getQuilometragem());
 
 
     }

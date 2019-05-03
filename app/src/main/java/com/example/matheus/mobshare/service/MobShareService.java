@@ -19,6 +19,7 @@ public interface MobShareService {
 //    String URL_BASE = "http://10.0.2.2:5001";
     String URL_BASE = "http://192.168.43.123:5001";
 //    String URL_BASE = "http://192.168.0.107:5001";
+    String URL_FOTO =  "http://192.168.43.123";
 
     @GET("/anuncios")
     Call<List<AnunciosView>> obterAnuncios();
@@ -37,4 +38,5 @@ public interface MobShareService {
 
     @GET("/tipoVeiculo/marca/{id}")
     Call<List<MarcaVeiculo>> carregarSpinnerMarcaVeiculo(@Path("id") int id_tipo_veiculo);
+
 }

@@ -9,6 +9,8 @@ const mysql = require("mysql");
 
 app.use(bodyParser.json({limit : "50mb"}));
 
+var sql = "";
+
 app.use(bodyParser.urlencoded({
     extended: true,
 	limit : "50mb"
@@ -38,7 +40,7 @@ app.get("/", (req, res) => {
 })
 //Listar todos os anuncios
 app.get("/anuncios", (req, res) => {
-    const sql = "SELECT * FROM view_anuncios";
+	sql = "SELECT * FROM view_anuncios";
 
     mysqlConnection.query(sql, function (erro, result, field){
         if(erro){
@@ -54,7 +56,7 @@ app.get("/anuncios", (req, res) => {
 //Listar anuncio por id
 app.get("/anuncios/:id", (req, res) => {
 	let id = parseInt(req.params.id);
-    const sql = "SELECT * FROM view_anuncios where id_anuncio = " + id;
+    sql = "SELECT * FROM view_anuncios where id_anuncio = " + id;
     
 	mysqlConnection.query(sql, function (erro, result, field){
         if(erro){
@@ -94,7 +96,7 @@ app.post("/register",async (req, res) => {
 	
 
     //Primeira consulta para verificar se o email existe
-    var sql = `SELECT count(*) as linhas FROM tbl_cliente WHERE email ="${email_cliente}"`;
+    sql = `SELECT count(*) as linhas FROM tbl_cliente WHERE email ="${email_cliente}"`;
     let rows = await new Promise((resolve, reject) => {    
         mysqlConnection.query(sql, function (erro, result, field){
             resolve(result);
@@ -129,7 +131,9 @@ app.post("/login", (req, res) => {
     
     const email = req.body.email_cliente;
     const senha = req.body.senha;
-    const sql = `SELECT * FROM tbl_cliente WHERE email = "${email}" AND senha = "${senha}"`;
+	
+	sql = `SELECT * FROM tbl_cliente WHERE email = "${email}" AND senha = "${senha}"`;
+	
     mysqlConnection.query(sql, function(erro, result){
         if(erro){
             console.log(erro);
@@ -147,7 +151,8 @@ app.post("/login", (req, res) => {
 })
 // APENAS TESTE
 app.get("/cliente", (req, res) => {
-    const sql = "SELECT * FROM tbl_cliente";
+    
+	sql = "SELECT * FROM tbl_cliente";
 
     mysqlConnection.query(sql, function (erro, result, field){
         if(erro){
@@ -162,22 +167,32 @@ app.get("/cliente", (req, res) => {
 });
 
 app.get("/tipoVeiculo", (req,res) => {
-	const sql = "SELECT * FROM tbl_tipo_veiculo";
-	
+	sql = "SELECT * FROM tbl_tipo_veiculo";
+	let result_res = [];
+	result_res.push({"id_tipo_veiculo":0,"nome_tipo_veiculo":"Selecione","excluido":0})
 	mysqlConnection.query(sql, function (erro, result, field){
         if(erro){
             res.send(erro);
             console.log("erro: " + sql);
         }
         else{
-            res.send(result);
+			result.filter(tipoVeiculo=>{
+				result_res.push(tipoVeiculo);
+			})
+            res.send(result_res);
             console.log(result);            
         } 
     });
 });
 app.get("/tipoVeiculo/marca/:id_tipoVeiculo", (req, res) => {
 		let id_tipo_marca = parseInt(req.params.id_tipoVeiculo);
-		const sql = `SELECT id_marca_veiculo, nome_marca FROM view_tipo_marca where id_tipo_veiculo = "${id_tipo_marca}"`;
+		
+		if(id_tipo_marca >=1){
+			sql = `SELECT id_marca_veiculo, nome_marca FROM view_tipo_marca where id_tipo_veiculo = "${id_tipo_marca}"`;
+		}else{
+			sql = `SELECT id_marca_veiculo, nome_marca FROM tbl_marca_veiculo`;
+		}
+		
 	
 	mysqlConnection.query(sql, function (erro, result, field){
         if(erro){

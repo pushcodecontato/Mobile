@@ -10,8 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.Model.AnunciosView;
+import com.example.matheus.mobshare.R;
+import com.example.matheus.mobshare.service.MobShareService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,13 +39,13 @@ public class AnuncioAdapter extends ArrayAdapter<AnunciosView> {
 
 
         ImageView img_veiculo = v.findViewById(R.id.img_veiculo);
-        String url_foto = "http://192.168.43.123/mobshare/ImagensCar/hb20.jpg";
+        String url_foto = MobShareService.URL_FOTO + "/mobshare/view/upload/"+anunciosView.getNome_foto();
         Picasso.get().load(url_foto).into(img_veiculo);
 
         txtNome_veiculo.setText(anunciosView.getNome_marca() + " " + anunciosView.getNome_modelo());
         txtNome_locador.setText(anunciosView.getLocador());
         txtEndereco.setText(anunciosView.getRua() + " " + anunciosView.getBairro());
-        txtValor.setText("R$ " + anunciosView.getPreco() + "/h");
+        txtValor.setText("R$ " + anunciosView.getValor_hora() + "/h");
 
 
         return v;

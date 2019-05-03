@@ -4,12 +4,12 @@ public class AnunciosView {
 
     private Integer id_anuncio;
     private String locador;
-    private String tipo_veiculo;
+    private String nome_tipo_veiculo;
     private String nome_marca;
     private String nome_modelo;
     private String ano;
     private String placa;
-    private String quilomentragem;
+    private String quilometragem;
     private String renava;
     private String descricao;
     private String horario_inicio;
@@ -23,7 +23,9 @@ public class AnunciosView {
     private String complemento;
     private String telefone;
     private String celular;
-    private String preco;
+    private String valor_hora;
+    private String nome_foto;
+
 
     public Integer getId_anuncio() {
         return id_anuncio;
@@ -41,12 +43,12 @@ public class AnunciosView {
         this.locador = locador;
     }
 
-    public String getTipo_veiculo() {
-        return tipo_veiculo;
+    public String getNome_tipo_veiculo() {
+        return nome_tipo_veiculo;
     }
 
-    public void setTipo_veiculo(String tipo_veiculo) {
-        this.tipo_veiculo = tipo_veiculo;
+    public void setNome_tipo_veiculo(String nome_tipo_veiculo) {
+        this.nome_tipo_veiculo = nome_tipo_veiculo;
     }
 
     public String getNome_marca() {
@@ -81,12 +83,12 @@ public class AnunciosView {
         this.placa = placa;
     }
 
-    public String getQuilomentragem() {
-        return quilomentragem;
+    public String getQuilometragem() {
+        return quilometragem;
     }
 
-    public void setQuilomentragem(String quilomentragem) {
-        this.quilomentragem = quilomentragem;
+    public void setQuilometragem(String quilometragem) {
+        this.quilometragem = quilometragem;
     }
 
     public String getRenava() {
@@ -193,11 +195,19 @@ public class AnunciosView {
         this.celular = celular;
     }
 
-    public String getPreco() {
-        return preco;
+    public String getValor_hora() {
+        return valor_hora;
     }
 
-    public void setPreco(String preco) {
-        this.preco = preco;
+    public void setValor_hora(String valor_hora) {
+        this.valor_hora = valor_hora;
+    }
+
+    public String getNome_foto() {
+        return nome_foto;
+    }
+
+    public void setNome_foto(String nome_foto) {
+        this.nome_foto = nome_foto;
     }
 }

@@ -40,20 +40,20 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
         spinnerMarcaPresenter = new SpinnerMarcaPresenter(this, service);
 
         spinnerTipoVeiculoPresenter.SpinnerTipoVeiculo();
-        spinnerMarcaPresenter.retornarMarca(10);
+//        spinnerMarcaPresenter.retornarMarca(10);
     }
     @Override
     public void carregarTipoVeiculo(final List<TipoVeiculo> tipoVeiculo) {
+
         ArrayAdapter<TipoVeiculo> arrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, tipoVeiculo);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-
         spTipoVeiculo.setAdapter(arrayAdapter);
 
         spTipoVeiculo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                preencheSpinner(tipoVeiculo.get(position).getId_tipo_veiculo());
-//                spinnerMarcaPresenter.retornarMarca(tipoVeiculo.get(position).getId_tipo_veiculo());
+                spinnerMarcaPresenter.retornarMarca(tipoVeiculo.get(position).getId_tipo_veiculo());
             }
 
             @Override

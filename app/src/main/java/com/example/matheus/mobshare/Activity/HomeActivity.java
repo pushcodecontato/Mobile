@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
 import com.example.matheus.mobshare.fragments.FragmentsAnuncios;
+import com.example.matheus.mobshare.service.MobShareService;
 import com.squareup.picasso.Picasso;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -74,7 +75,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        Integer idCliente = sharedPreferences_home.getInt("IdCliente", 0);
         String fotoCliente = sharedPreferences_home.getString("FotoCliente", "null");
 
-        String url_foto = "http://192.168.43.123/mobshareapi/"+fotoCliente;
+        String url_foto = MobShareService.URL_FOTO + "/mobshareapi/"+fotoCliente;
+
+        Log.d("TESTE FOTO CLIENTE", url_foto);
 
 
         Log.d("TESTE: ", url_foto);
