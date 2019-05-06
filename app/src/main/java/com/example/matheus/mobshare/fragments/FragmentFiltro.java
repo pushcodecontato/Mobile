@@ -1,23 +1,24 @@
-package com.example.matheus.mobshare.Activity;
+package com.example.matheus.mobshare.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.matheus.mobshare.Model.MarcaVeiculo;
 import com.example.matheus.mobshare.Model.ModeloVeiculo;
 import com.example.matheus.mobshare.Model.TipoVeiculo;
 import com.example.matheus.mobshare.R;
-import com.example.matheus.mobshare.fragments.FragmentsAnuncios;
 import com.example.matheus.mobshare.presenter.SpinnerMarcaPresenter;
 import com.example.matheus.mobshare.presenter.SpinnerModeloVeiculoPresenter;
 import com.example.matheus.mobshare.presenter.SpinnerTipoVeiculoPresenter;
@@ -27,7 +28,7 @@ import com.example.matheus.mobshare.view.CarregarSpinnersView;
 
 import java.util.List;
 
-public class FiltroActivity extends AppCompatActivity implements CarregarSpinnersView{
+public class FragmentFiltro extends Fragment implements CarregarSpinnersView {
 
     private Spinner spTipoVeiculo;
     private Spinner spMarcaVeiculo;
@@ -38,16 +39,24 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
     SpinnerMarcaPresenter spinnerMarcaPresenter;
     SpinnerModeloVeiculoPresenter spinnerModeloVeiculoPresenter;
 
+    Button btnEnviarFiltro;
+
     Integer idTipo_Veiculo, idMarcaVeiculo, idModeloVeiculo;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.filtro_layout);
+    public FragmentFiltro(){}
 
-        spTipoVeiculo = (Spinner) findViewById(R.id.spTipoVeiculo);
-        spMarcaVeiculo = (Spinner) findViewById(R.id.spMarcaVeiculo);
-        spModeloVeiculo = (Spinner) findViewById(R.id.spModeloVeiculo);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.filtro_layout, container, false);
+        spTipoVeiculo = (Spinner) view.findViewById(R.id.spTipoVeiculo);
+        spMarcaVeiculo = (Spinner) view.findViewById(R.id.spMarcaVeiculo);
+        spModeloVeiculo = (Spinner) view.findViewById(R.id.spModeloVeiculo);
+        btnEnviarFiltro = (Button) view.findViewById(R.id.EnviarFiltro);
 
         spinnerTipoVeiculoPresenter = new SpinnerTipoVeiculoPresenter(this,service);
         spinnerMarcaPresenter = new SpinnerMarcaPresenter(this, service);
@@ -55,13 +64,32 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
 
         spinnerTipoVeiculoPresenter.SpinnerTipoVeiculo();
 
-        fm = getSupportFragmentManager();
-//        spinnerMarcaPresenter.retornarMarca(10);
+        fm = getFragmentManager();
+        btnEnviarFiltro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new FragmentsAnuncios();
+                Bundle bundle = new Bundle();
+                bundle.putInt("idTipoVeiculo", idTipo_Veiculo);
+                bundle.putInt("idMarcaVeiculo", idMarcaVeiculo);
+                bundle.putInt("idModeloVeiculo", idModeloVeiculo);
+                fragment.setArguments(bundle);
+
+
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.frame_layout, fragment);
+                ft.commit();
+            }
+        });
+
+        return view;
     }
+
+
+
     @Override
     public void carregarTipoVeiculo(final List<TipoVeiculo> tipoVeiculo) {
-
-        ArrayAdapter<TipoVeiculo> arrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, tipoVeiculo);
+        ArrayAdapter<TipoVeiculo> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, tipoVeiculo);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spTipoVeiculo.setAdapter(arrayAdapter);
 
@@ -82,7 +110,7 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
 
     @Override
     public void carregarMarcaVeiculo(final List<MarcaVeiculo> marcaVeiculo) {
-        ArrayAdapter<MarcaVeiculo> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, marcaVeiculo);
+        ArrayAdapter<MarcaVeiculo> adapter = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, marcaVeiculo);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
 
         spMarcaVeiculo.setAdapter(adapter);
@@ -106,7 +134,7 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
 
     @Override
     public void carregarModeloVeiculo(final List<ModeloVeiculo> modeloVeiculos) {
-        ArrayAdapter<ModeloVeiculo> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, modeloVeiculos);
+        ArrayAdapter<ModeloVeiculo> adapter = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, modeloVeiculos);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
 
         spModeloVeiculo.setAdapter(adapter);
@@ -124,22 +152,4 @@ public class FiltroActivity extends AppCompatActivity implements CarregarSpinner
             }
         });
     }
-
-    public void enviarFiltro(View view){
-
-        Fragment fragment = new FragmentsAnuncios();
-        Bundle bundle = new Bundle();
-        bundle.putInt("idTipoVeiculo", idTipo_Veiculo);
-        bundle.putInt("idMarcaVeiculo", idMarcaVeiculo);
-        bundle.putInt("idModeloVeiculo", idModeloVeiculo);
-        fragment.setArguments(bundle);
-
-
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame_layout, fragment);
-        ft.commit();
-
-        Toast.makeText(this, "OI", Toast.LENGTH_SHORT).show();
-    }
-
 }

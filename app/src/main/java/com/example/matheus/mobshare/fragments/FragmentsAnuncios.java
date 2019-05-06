@@ -1,6 +1,5 @@
 package com.example.matheus.mobshare.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.example.matheus.mobshare.Activity.FiltroActivity;
 import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
@@ -22,6 +21,7 @@ import com.example.matheus.mobshare.presenter.ListaAnuncioPresenter;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.ListaAnuncioView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,10 +31,12 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
 
     ListView lstAnuncios;
     ListaAnuncioPresenter listaPresenter;
-    ImageView btnAbrirFiltro;
-
-
+    ImageView btnAbrirFiltro, imgNotFound;
+    TextView txtNotFound;
+    Bundle bundle;
+    ArrayList<String> filtro;
     public FragmentsAnuncios(){}
+    Integer id_tipo_veiculo, id_marca_veiculo, id_modelo_veiculo;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,8 +49,12 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
 
         View v = inflater.inflate(R.layout.fragment_lista_anuncios,container, false);
 
+
+
         lstAnuncios = v.findViewById(R.id.lstAnuncios);
         btnAbrirFiltro = v.findViewById(R.id.btnAbrirFiltro);
+        txtNotFound = v.findViewById(R.id.txtNotFound);
+        imgNotFound = v.findViewById(R.id.imgNotFound);
 
         anuncioAdapter = new AnuncioAdapter(getContext());
 
@@ -57,35 +63,63 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
         lstAnuncios.setOnItemClickListener(this);
 
         listaPresenter = new ListaAnuncioPresenter(this, ServiceFactoty.create());
-
+        filtro = new ArrayList<>();
         btnAbrirFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), FiltroActivity.class);
-                startActivity(intent);
+                Fragment fragment = new FragmentFiltro();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+
+                ft.replace(R.id.frame_layout, fragment);
+
+                ft.commit();
             }
         });
         return v;
 
     }
-
     @Override
     public void onResume() {
+        bundle = new Bundle();
+        bundle = getArguments();
+        id_tipo_veiculo = 0;
+        id_marca_veiculo = 0;
+        id_modelo_veiculo = 0;
+
+        if(bundle != null){
+            id_tipo_veiculo = bundle.getInt("idTipoVeiculo");
+            id_marca_veiculo = bundle.getInt("idMarcaVeiculo");
+            id_modelo_veiculo = bundle.getInt("idModeloVeiculo");
+        }
+
+
+        filtro.add(String.valueOf(id_tipo_veiculo));
+        filtro.add(String.valueOf(id_marca_veiculo));
+        filtro.add(String.valueOf(id_modelo_veiculo));
+
+        listaPresenter.carregarAnuncios(filtro);
         super.onResume();
-        listaPresenter.carregarAnuncios();
     }
 
     @Override
     public void PreencherListaAnuncio(List<AnunciosView> lstAnuncio) {
-        anuncioAdapter.clear();
-        anuncioAdapter.addAll(lstAnuncio);
+        if(lstAnuncio.isEmpty()){
+            imgNotFound.setVisibility(View.VISIBLE);
+            txtNotFound.setVisibility(View.VISIBLE);
+        }else{
+            anuncioAdapter.clear();
+            anuncioAdapter.addAll(lstAnuncio);
+            imgNotFound.setVisibility(View.GONE);
+            txtNotFound.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        bundle = new Bundle();
         AnunciosView anunciosView = anuncioAdapter.getItem(position);
-        Bundle bundle = new Bundle();
-
         Fragment fragment = new FragmentListarAnuncios();
         bundle.putInt("id_anuncio", anunciosView.getId_anuncio());
         fragment.setArguments(bundle);

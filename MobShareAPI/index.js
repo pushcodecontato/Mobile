@@ -1,6 +1,6 @@
 const app = require("express")();
 const http = require("http").createServer(app);
-var session = require('express-session');
+
 var fs = require("fs");
 var uniqid = require("uniqid");
 const bodyParser = require("body-parser");
@@ -15,16 +15,10 @@ app.use(bodyParser.urlencoded({
     extended: true,
 	limit : "50mb"
 }))
-app.use(session({
-    secret : 'secret',
-    resave : true,
-    saveUninitialized : true
-}));
-
 const mysqlConnection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "",
+    password: "bcd127",
     database: "mob_share"
 });
 
@@ -41,10 +35,9 @@ app.get("/", (req, res) => {
 //Listar todos os anuncios
 app.post("/anuncios", (req, res) => {
     
-    let id_tipo_veiculo = req.body.id_tipo_veiculo;
-    let id_tipo_marca = req.body.id_tipo_marca;
-    let id_modelo = req.body.id_modelo;
-    
+    let id_tipo_veiculo = parseInt(req.body[0]);
+    let id_tipo_marca = parseInt(req.body[1]);
+    let id_modelo = parseInt(req.body[2]);
 
     if(id_tipo_veiculo > 0 && id_tipo_marca > 0 && id_modelo > 0)
         sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo} AND id_tipo_marca = ${id_tipo_marca} AND id_modelo = ${id_modelo}`;
@@ -52,8 +45,10 @@ app.post("/anuncios", (req, res) => {
         sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo} AND id_tipo_marca = ${id_tipo_marca}`;
     else if(id_tipo_veiculo > 0)
         sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo}`;
-    else
+    else{
         sql = `SELECT * FROM view_anuncios`;
+    }
+        
     
 
     mysqlConnection.query(sql, function (erro, result, field){
@@ -62,8 +57,7 @@ app.post("/anuncios", (req, res) => {
             console.log("Erro: " + sql);
         }
         else{
-            res.send(result);
-            console.log(result);            
+            res.send(result);       
         } 
     });
 })
@@ -78,8 +72,7 @@ app.get("/anuncios/:id", (req, res) => {
             console.log("Erro: " + sql);
         }
         else{
-            res.send(result);
-            console.log(result);            
+            res.send(result);     
         } 
     });
 })
@@ -100,8 +93,14 @@ app.post("/register",async (req, res) => {
 
     var dt_nasc = ano + "-" + mes + "-" + dia
 	
-	
+	var imagemBinary = new Buffer(img_cliente64, 'base64');
+	var imgCliente = "img/" + uniqid() + ".jpg";
     
+    fs.appendFile(imgCliente, imagemBinary , function(erro){
+		if(erro) throw erro
+			console.log("ERRO AO CARREGAR IMAGEM: " + erro);
+	});
+	
 
     //Primeira consulta para verificar se o email existe
     sql = `SELECT count(*) as linhas FROM tbl_cliente WHERE email ="${email_cliente}"`;
@@ -125,7 +124,6 @@ app.post("/register",async (req, res) => {
 					res.send({"sucesso": true, 
 						"mensagem" : "Cliente inserido com sucesso",
 						"aviso" : "Termine seu cadastro em nosso site da Mob'Share para anunciar!"});
-                        salvarImagem(img_cliente64);
 				}else{
                     res.send({"erro": erro}); 
                     console.log(erro);
@@ -136,7 +134,6 @@ app.post("/register",async (req, res) => {
 	
         
 });
-
 app.post("/login", (req, res) => {
     
     const email = req.body.email_cliente;
@@ -151,7 +148,6 @@ app.post("/login", (req, res) => {
         else{
             if(result.length > 0){
                 res.send(result);
-                console.log(result);
             }
             else{
                 res.send({"sucesso" : false, "mensagem" : "Email ou senha incorreto."});
@@ -159,25 +155,9 @@ app.post("/login", (req, res) => {
         }
     });
 })
-// APENAS TESTE
-app.get("/cliente", (req, res) => {
-    
-	sql = "SELECT * FROM tbl_cliente";
-
-    mysqlConnection.query(sql, function (erro, result, field){
-        if(erro){
-            res.send(erro);
-            console.log("erro: " + sql);
-        }
-        else{
-            res.send(result);
-            console.log(result);            
-        } 
-    });
-});
-
 app.get("/tipoVeiculo", (req,res) => {
-	sql = "SELECT * FROM tbl_tipo_veiculo WHERE excluido = 0";
+	sql = "SELECT * FROM tbl_tipo_veiculo";
+	
 	let result_res = [];
 	result_res.push({"id_tipo_veiculo":0,"nome_tipo_veiculo":"Selecione","excluido":0})
 	mysqlConnection.query(sql, function (erro, result, field){
@@ -189,18 +169,19 @@ app.get("/tipoVeiculo", (req,res) => {
 			result.filter(tipoVeiculo=>{
 				result_res.push(tipoVeiculo);
 			})
-            res.send(result_res);
-            console.log(result);            
+            res.send(result_res);          
         } 
     });
 });
 app.get("/tipoVeiculo/marca/:id_tipoVeiculo", (req, res) => {
-		let id_tipo_veiculo = parseInt(req.params.id_tipoVeiculo);
+		let id_tipoVeiculo = parseInt(req.params.id_tipoVeiculo);
+		let result_res = [];
 		
-		if(id_tipo_veiculo >=1){
-			sql = `SELECT * FROM view_tipo_marca where id_tipo_veiculo = "${id_tipo_veiculo}"`;
+		result_res.push({"id_marca_veiculo":0,"nome_marca":"Selecione","status":1});
+		if(id_tipoVeiculo >=1){
+			sql = `SELECT id_marca_veiculo, nome_marca FROM view_tipo_marca where id_tipo_veiculo = "${id_tipoVeiculo}"`;
 		}else{
-			sql = `SELECT * FROM tbl_marca_veiculo`;
+			sql = `SELECT id_marca_veiculo, nome_marca FROM tbl_marca_veiculo`;
 		}
 		
 	
@@ -210,13 +191,18 @@ app.get("/tipoVeiculo/marca/:id_tipoVeiculo", (req, res) => {
             console.log("erro: " + sql);
         }
         else{
-            res.send(result);
-            console.log(result);            
+			result.filter(marcaVeiculo => {
+				result_res.push(marcaVeiculo);
+			});
+            res.send(result_res);       
         } 
     });
 });
+
 app.get("/tipoVeiculo/marca/modelo/:id_tipo_marca", (req, res) => {
     let id_tipo_marca = parseInt(req.params.id_tipo_marca);
+    let result_res = [];
+    result_res.push({"id_modelo":0,"nome_modelo":"Selecione","status":1});
 
     if(id_tipo_marca >=1){
         sql = `SELECT * FROM tbl_modelo_veiculo as modelo where id_marca_tipo = "${id_tipo_marca}"`;
@@ -229,22 +215,13 @@ app.get("/tipoVeiculo/marca/modelo/:id_tipo_marca", (req, res) => {
             console.log("erro: " + sql);
         }
         else{
-            res.send(result);
-            console.log(result);            
+            result.filter(modeloVeiculo => {
+				result_res.push(modeloVeiculo);
+			});
+            res.send(result_res);          
         } 
     });
 });
-
-function salvarImagem(img_cliente64){
-    var imagemBinary = new Buffer(img_cliente64, 'base64');
-    var imgCliente = "img/" + uniqid() + ".jpg";
-    
-	fs.appendFile(imgCliente, imagemBinary , function(erro){
-		if(erro) throw erro
-			console.log("ERRO AO CARREGAR IMAGEM: " + erro);
-    });
-    
-}
 
 //pegando conexao na porta 5001
 http.listen(5001, () => {

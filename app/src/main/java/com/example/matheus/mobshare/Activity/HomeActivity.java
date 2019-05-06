@@ -95,8 +95,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_locados: {
-                Intent intent = new Intent(this, VisualizarActivityView.class);
-                startActivity(intent);
+                Toast.makeText(this, "Menu 3", Toast.LENGTH_SHORT).show();
+                Log.d("TESTE!", "Menu3 ");
                 break;
             }
             case R.id.nav_alugados: {

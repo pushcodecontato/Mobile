@@ -37,12 +37,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lstAnuncios"
-        />
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/not_found"
+            android:visibility="gone"
+            android:id="@+id/imgNotFound"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nenhum veiculo encontrado"
+            android:id="@+id/txtNotFound"
+            android:textSize="25sp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            />
+
 
     </LinearLayout>
 

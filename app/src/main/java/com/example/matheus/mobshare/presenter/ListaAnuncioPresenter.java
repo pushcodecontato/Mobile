@@ -7,6 +7,7 @@ import com.example.matheus.mobshare.service.MobShareService;
 import com.example.matheus.mobshare.service.ServiceFactoty;
 import com.example.matheus.mobshare.view.ListaAnuncioView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,11 +24,11 @@ public class ListaAnuncioPresenter{
         this.service = service;
     }
 
-    public void carregarAnuncios(){
+    public void carregarAnuncios(ArrayList<String> filtro){
 
         MobShareService service = ServiceFactoty.create();
 
-        Call<List<AnunciosView>> call = service.obterAnuncios();
+        Call<List<AnunciosView>> call = service.obterAnuncios(filtro);
 
         call.enqueue(new Callback<List<AnunciosView>>() {
             @Override
