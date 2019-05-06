@@ -1,6 +1,5 @@
 const app = require("express")();
 const http = require("http").createServer(app);
-
 var fs = require("fs");
 var uniqid = require("uniqid");
 const bodyParser = require("body-parser");
@@ -38,17 +37,18 @@ app.post("/anuncios", (req, res) => {
     let id_tipo_veiculo = parseInt(req.body[0]);
     let id_tipo_marca = parseInt(req.body[1]);
     let id_modelo = parseInt(req.body[2]);
+    let sql =" SELECT * FROM view_anuncios ";
+    let wheres = []; 
+    
+    if(id_tipo_veiculo > 0 )wheres.push(`id_tipo_veiculo = ${id_tipo_veiculo}`);
 
-    if(id_tipo_veiculo > 0 && id_tipo_marca > 0 && id_modelo > 0)
-        sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo} AND id_tipo_marca = ${id_tipo_marca} AND id_modelo = ${id_modelo}`;
-    else if(id_tipo_veiculo > 0 && id_tipo_marca > 0)
-        sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo} AND id_tipo_marca = ${id_tipo_marca}`;
-    else if(id_tipo_veiculo > 0)
-        sql = `SELECT * FROM view_anuncios WHERE id_tipo_veiculo = ${id_tipo_veiculo}`;
-    else{
-        sql = `SELECT * FROM view_anuncios`;
-    }
-        
+    if( id_tipo_marca > 0) wheres.push(`id_tipo_marca = ${id_tipo_marca}`);
+
+    if(id_modelo > 0) wheres.push(`id_modelo = ${id_modelo}`);
+    
+    if(wheres.length >=1) sql += ' WHERE '+ wheres.join(' AND ');
+
+    console.log(sql);
     
 
     mysqlConnection.query(sql, function (erro, result, field){
@@ -95,11 +95,6 @@ app.post("/register",async (req, res) => {
 	
 	var imagemBinary = new Buffer(img_cliente64, 'base64');
 	var imgCliente = "img/" + uniqid() + ".jpg";
-    
-    fs.appendFile(imgCliente, imagemBinary , function(erro){
-		if(erro) throw erro
-			console.log("ERRO AO CARREGAR IMAGEM: " + erro);
-	});
 	
 
     //Primeira consulta para verificar se o email existe
@@ -123,7 +118,8 @@ app.post("/register",async (req, res) => {
                 if(!erro){				
 					res.send({"sucesso": true, 
 						"mensagem" : "Cliente inserido com sucesso",
-						"aviso" : "Termine seu cadastro em nosso site da Mob'Share para anunciar!"});
+                        "aviso" : "Termine seu cadastro em nosso site da Mob'Share para anunciar!"});
+                        salvarImagem(img_cliente64);
 				}else{
                     res.send({"erro": erro}); 
                     console.log(erro);
@@ -223,6 +219,16 @@ app.get("/tipoVeiculo/marca/modelo/:id_tipo_marca", (req, res) => {
     });
 });
 
+function salvarImagem(img_cliente64){
+    var imagemBinary = new Buffer(img_cliente64, 'base64');
+    var imgCliente = "img/" + uniqid() + ".jpg";
+
+	fs.appendFile(imgCliente, imagemBinary , function(erro){
+		if(erro) throw erro
+			console.log("ERRO AO CARREGAR IMAGEM: " + erro);
+    });
+
+}
 //pegando conexao na porta 5001
 http.listen(5001, () => {
     console.log("Servidor rodando na porta 5001")

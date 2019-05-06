@@ -32,7 +32,7 @@ public class LoginPresenter {
            @Override
            public void onResponse(Call<List<Cliente>> call, Response<List<Cliente>> response) {
                List<Cliente> cliente = response.body();
-               if(cliente.isEmpty()){
+               if(cliente.get(0) == null){
                    loginView.showMessage(false,"Usuário não encontrado, verificar email e senha!");
                    Log.d("ERRO: ", "USUARIO NÃO ENCONTRADO");
                }else{

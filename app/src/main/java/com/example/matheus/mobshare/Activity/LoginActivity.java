@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             Toast.makeText(getApplicationContext(), mensagem,Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
-            onDestroy();
+            finish();
         }else{
             Toast.makeText(getApplicationContext(), mensagem,Toast.LENGTH_LONG).show();
         }
@@ -88,11 +88,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         editor.putString("EmailCliente", cliente.getEmail_cliente());
         editor.putString("FotoCliente", cliente.getFoto_cliente());
         editor.commit();
-        Log.d("TESTE", cliente.getFoto_cliente());
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
     }
 }
