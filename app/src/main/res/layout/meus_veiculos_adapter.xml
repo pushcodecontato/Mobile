@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/anuncio_radius"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="120dp"
+            android:id="@+id/img_veiculo"
+            android:scaleType = "fitXY"
+            android:adjustViewBounds = "true"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome Veículo"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:id="@+id/txtNome_veiculo"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Marca"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:id="@+id/MarcaVeiculo"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ano"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:id="@+id/txtAnoVeiculo"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quilomentragem"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:id="@+id/txtQuilometragem"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+
+                >
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="16dp"-->
+                <!--android:text="4.7"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:id="@+id/avaliacao"-->
+                <!--/>-->
+                <!--<ImageView-->
+                <!--android:layout_width="22dp"-->
+                <!--android:layout_height="22dp"-->
+                <!--android:src="@drawable/star"-->
+                <!--/>-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="16dp"-->
+                <!--android:text="15"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:id="@+id/numero_pessoas"-->
+                <!--/>-->
+                <!--<ImageView-->
+                <!--android:layout_width="22dp"-->
+                <!--android:layout_height="22dp"-->
+                <!--android:src="@drawable/people"-->
+                <!--/>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="60dp"
+                    android:textColor="@color/black"
+                    android:id="@+id/valor"
+                    />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

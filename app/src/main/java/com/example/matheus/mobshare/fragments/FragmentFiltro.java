@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.matheus.mobshare.Activity.HomeActivity;
 import com.example.matheus.mobshare.Model.MarcaVeiculo;
 import com.example.matheus.mobshare.Model.ModeloVeiculo;
 import com.example.matheus.mobshare.Model.TipoVeiculo;
@@ -30,10 +30,13 @@ import java.util.List;
 
 public class FragmentFiltro extends Fragment implements CarregarSpinnersView {
 
+    static String tag = "FragmentFiltro";
+
     private Spinner spTipoVeiculo;
     private Spinner spMarcaVeiculo;
     private Spinner spModeloVeiculo;
     FragmentManager fm;
+    HomeActivity activity;
     MobShareService service = ServiceFactoty.create();
     SpinnerTipoVeiculoPresenter spinnerTipoVeiculoPresenter;
     SpinnerMarcaPresenter spinnerMarcaPresenter;
@@ -63,22 +66,20 @@ public class FragmentFiltro extends Fragment implements CarregarSpinnersView {
         spinnerModeloVeiculoPresenter = new SpinnerModeloVeiculoPresenter(this, service);
 
         spinnerTipoVeiculoPresenter.SpinnerTipoVeiculo();
-
+        activity = (HomeActivity) getActivity();
         fm = getFragmentManager();
         btnEnviarFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new FragmentsAnuncios();
+
                 Bundle bundle = new Bundle();
                 bundle.putInt("idTipoVeiculo", idTipo_Veiculo);
                 bundle.putInt("idMarcaVeiculo", idMarcaVeiculo);
                 bundle.putInt("idModeloVeiculo", idModeloVeiculo);
                 fragment.setArguments(bundle);
 
-
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.frame_layout, fragment);
-                ft.commit();
+                activity.navegarFragment(fragment, tag);;
             }
         });
 

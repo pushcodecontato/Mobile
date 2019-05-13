@@ -24,8 +24,6 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Activity.CadastroActivity" />
         <activity android:name=".Activity.HomeActivity"></activity>
-        <activity android:name=".Activity.VisualizarActivityView"></activity>
-        <activity android:name=".Activity.FiltroActivity"></activity>
     </application>
 
 </manifest>

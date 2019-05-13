@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.matheus.mobshare.Activity.HomeActivity;
 import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
@@ -27,8 +27,10 @@ import java.util.List;
 
 public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, AdapterView.OnItemClickListener {
 
-    AnuncioAdapter anuncioAdapter;
+    static String tag = "FragmentsAnuncios";
 
+    AnuncioAdapter anuncioAdapter;
+    HomeActivity activity;
     ListView lstAnuncios;
     ListaAnuncioPresenter listaPresenter;
     ImageView btnAbrirFiltro, imgNotFound;
@@ -55,7 +57,7 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
         btnAbrirFiltro = v.findViewById(R.id.btnAbrirFiltro);
         txtNotFound = v.findViewById(R.id.txtNotFound);
         imgNotFound = v.findViewById(R.id.imgNotFound);
-
+        activity = (HomeActivity) getActivity();
         anuncioAdapter = new AnuncioAdapter(getContext());
 
         lstAnuncios.setAdapter(anuncioAdapter);
@@ -67,13 +69,10 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
         btnAbrirFiltro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new FragmentFiltro();
+
                 FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-
-                ft.replace(R.id.frame_layout, fragment);
-
-                ft.commit();
+                Fragment fragment = new FragmentFiltro();
+                activity.navegarFragment(fragment, tag);
             }
         });
         return v;
@@ -124,11 +123,7 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
         bundle.putInt("id_anuncio", anunciosView.getId_anuncio());
         fragment.setArguments(bundle);
 
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame_layout, fragment);
-        ft.addToBackStack("pilha");
-        ft.commit();
+        activity.navegarFragment(fragment, tag);
     }
 
 

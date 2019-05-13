@@ -67,33 +67,33 @@
                android:layout_marginTop="10dp"
 
                >
-               <!--<TextView-->
-                   <!--android:layout_width="wrap_content"-->
-                   <!--android:layout_height="wrap_content"-->
-                   <!--android:textSize="16dp"-->
-                   <!--android:text="4.7"-->
-                   <!--android:textColor="@color/black"-->
-                   <!--android:id="@+id/avaliacao"-->
-                   <!--/>-->
-               <!--<ImageView-->
-                   <!--android:layout_width="22dp"-->
-                   <!--android:layout_height="22dp"-->
-                   <!--android:src="@drawable/star"-->
-                   <!--/>-->
-               <!--<TextView-->
-                   <!--android:layout_width="wrap_content"-->
-                   <!--android:layout_height="wrap_content"-->
-                   <!--android:textSize="16dp"-->
-                   <!--android:text="15"-->
-                   <!--android:layout_marginLeft="15dp"-->
-                   <!--android:textColor="@color/black"-->
-                   <!--android:id="@+id/numero_pessoas"-->
-                   <!--/>-->
-               <!--<ImageView-->
-                   <!--android:layout_width="22dp"-->
-                   <!--android:layout_height="22dp"-->
-                   <!--android:src="@drawable/people"-->
-                   <!--/>-->
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="16dp"
+                   android:text="4.7"
+                   android:textColor="@color/black"
+                   android:id="@+id/txtAvaliacao"
+                   />
+               <ImageView
+                   android:layout_width="22dp"
+                   android:layout_height="22dp"
+                   android:src="@drawable/star"
+                   />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="16dp"
+                   android:text="15"
+                   android:layout_marginLeft="15dp"
+                   android:textColor="@color/black"
+                   android:id="@+id/numero_pessoas"
+                   />
+               <ImageView
+                   android:layout_width="22dp"
+                   android:layout_height="22dp"
+                   android:src="@drawable/people"
+                   />
 
                <TextView
                    android:layout_width="wrap_content"

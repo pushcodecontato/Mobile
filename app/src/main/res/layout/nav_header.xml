@@ -20,9 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
         >
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Olá!"
+            android:textSize="19sp"
+            android:textColor="@color/white"
+            />
         <TextView
             android:id="@+id/txtNomeUsuarioNav"
             android:layout_width="match_parent"

@@ -2,7 +2,6 @@ package com.example.matheus.mobshare.presenter;
 
 import android.util.Log;
 
-import com.example.matheus.mobshare.Model.ApiResult;
 import com.example.matheus.mobshare.Model.Cliente;
 import com.example.matheus.mobshare.service.MobShareService;
 import com.example.matheus.mobshare.service.ServiceFactoty;
@@ -35,9 +34,11 @@ public class LoginPresenter {
                if(cliente.get(0) == null){
                    loginView.showMessage(false,"Usuário não encontrado, verificar email e senha!");
                    Log.d("ERRO: ", "USUARIO NÃO ENCONTRADO");
+
                }else{
                    loginView.showMessage(true,"Login efetuado com sucesso");
                    loginView.salvarDados(cliente.get(0));
+
                }
 
            }

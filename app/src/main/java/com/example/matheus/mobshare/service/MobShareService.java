@@ -4,6 +4,7 @@ import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.Model.ApiResult;
 import com.example.matheus.mobshare.Model.Cliente;
 import com.example.matheus.mobshare.Model.MarcaVeiculo;
+import com.example.matheus.mobshare.Model.MeusVeiculos;
 import com.example.matheus.mobshare.Model.ModeloVeiculo;
 import com.example.matheus.mobshare.Model.TipoVeiculo;
 
@@ -18,10 +19,10 @@ import retrofit2.http.Path;
 
 public interface MobShareService {
 
-    String URL_BASE = "http://10.0.2.2:5001";
+//    String URL_BASE = "http://10.0.2.2:5001";
 //    String URL_BASE = "http://192.168.43.123:5001";
-//    String URL_BASE = "http://192.168.0.107:5001";
-    String URL_FOTO =  "http://10.0.2.2";
+    String URL_BASE = "http://192.168.0.107:5001";
+    String URL_FOTO =  "http://192.168.0.107";
 
     @POST("/anuncios")
     Call<List<AnunciosView>> obterAnuncios(@Body ArrayList<String> filtro);
@@ -43,4 +44,7 @@ public interface MobShareService {
 
     @GET("/tipoVeiculo/marca/modelo/{id}")
     Call<List<ModeloVeiculo>> carregarSpinnerModeloVeiculo(@Path("id") int id_marca_veiculo);
+
+    @GET("/getVeiculos/{id}")
+    Call<List<MeusVeiculos>> obterVeiculos(@Path("id") int id_veiculo);
 }

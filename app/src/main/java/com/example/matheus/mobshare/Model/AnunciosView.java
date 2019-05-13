@@ -25,7 +25,8 @@ public class AnunciosView {
     private String celular;
     private String valor_hora;
     private String nome_foto;
-
+    private Float media;
+    private String email;
 
     public Integer getId_anuncio() {
         return id_anuncio;
@@ -209,5 +210,30 @@ public class AnunciosView {
 
     public void setNome_foto(String nome_foto) {
         this.nome_foto = nome_foto;
+    }
+
+    public Float getMedia() {
+
+        if(media == null){
+            media = Float.valueOf(0);
+        }
+        else if(media > 10){
+            media = Float.valueOf(10);
+        }
+        return media;
+    }
+
+    public void setMedia(Float media) {
+
+
+        this.media = media;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

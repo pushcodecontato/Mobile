@@ -11,6 +11,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="25dp"
         android:onClick="cadastrar_conta"
+        android:id="@+id/btnCadastrarConta"
         >
 
         <ImageView
@@ -72,6 +73,7 @@
             android:background="@drawable/btn_padrao"
             android:textColor="@color/white"
             android:onClick="btnLogar"
+            android:id="@+id/btnogin"
             />
 
         <TextView

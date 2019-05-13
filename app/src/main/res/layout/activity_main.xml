@@ -8,6 +8,7 @@
     android:background="@color/verde_site"
     android:orientation="vertical"
     android:gravity="center"
+    android:id="@+id/linearMain"
     >
     <LinearLayout
         android:layout_width="match_parent"
