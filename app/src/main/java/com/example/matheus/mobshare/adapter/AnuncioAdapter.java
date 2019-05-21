@@ -37,16 +37,18 @@ public class AnuncioAdapter extends ArrayAdapter<AnunciosView> {
         TextView txtEndereco = v.findViewById(R.id.endereco);
         TextView txtValor = v.findViewById(R.id.valor);
         TextView txtAvaliacao = v.findViewById(R.id.txtAvaliacao);
+        TextView txtNumPessoas = v.findViewById(R.id.numero_pessoas);
 
         ImageView img_veiculo = v.findViewById(R.id.img_veiculo);
         String url_foto = MobShareService.URL_FOTO + "/mobshare/view/upload/"+anunciosView.getNome_foto();
-        Picasso.get().load(url_foto).into(img_veiculo);
+        Picasso.get().load(url_foto).placeholder(R.drawable.camera).into(img_veiculo);
 
         txtNome_veiculo.setText(anunciosView.getNome_marca() + " " + anunciosView.getNome_modelo());
         txtNome_locador.setText(anunciosView.getLocador());
         txtEndereco.setText(anunciosView.getRua() + " " + anunciosView.getBairro());
         txtValor.setText("R$ " + anunciosView.getValor_hora() + "/h");
-        txtAvaliacao.setText(anunciosView.getMedia()+"");
+        txtAvaliacao.setText(anunciosView.getAvaliacao()+"");
+        txtNumPessoas.setText(anunciosView.getNumero_locacao());
 
         return v;
     }

@@ -25,8 +25,11 @@ public class AnunciosView {
     private String celular;
     private String valor_hora;
     private String nome_foto;
-    private Float media;
+    private Float avaliacao;
     private String email;
+    private String numero_locacao;
+
+
 
     public Integer getId_anuncio() {
         return id_anuncio;
@@ -212,21 +215,21 @@ public class AnunciosView {
         this.nome_foto = nome_foto;
     }
 
-    public Float getMedia() {
+    public Float getAvaliacao() {
 
-        if(media == null){
-            media = Float.valueOf(0);
+        if(avaliacao == null){
+            avaliacao = Float.valueOf(0);
         }
-        else if(media > 10){
-            media = Float.valueOf(10);
+        else if(avaliacao > 10){
+            avaliacao = Float.valueOf(10);
         }
-        return media;
+        return avaliacao;
     }
 
-    public void setMedia(Float media) {
+    public void setAvaliacao(Float avaliacao) {
 
 
-        this.media = media;
+        this.avaliacao = avaliacao;
     }
 
     public String getEmail() {
@@ -235,5 +238,16 @@ public class AnunciosView {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNumero_locacao() {
+        if(numero_locacao == null){
+            numero_locacao = "0";
+        }
+        return numero_locacao;
+    }
+
+    public void setNumero_locacao(String numero_locacao) {
+        this.numero_locacao = numero_locacao;
     }
 }

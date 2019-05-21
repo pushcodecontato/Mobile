@@ -218,7 +218,21 @@ app.get("/tipoVeiculo/marca/modelo/:id_tipo_marca", (req, res) => {
         } 
     });
 });
+app.get("/getVeiculos/:idCliente", (req, res) => {
+    let idCliente = parseInt(req.params.idCliente);
+    sql = `SELECT * FROM view_meus_veiculo WHERE id_cliente = ${idCliente}`;
 
+    mysqlConnection.query(sql, function(erro, result, field){
+        if(erro){
+            res.send(erro);
+            console.log("Erro: " + sql);
+        }else{
+            res.send(result);
+            console.log(sql);
+            console.log(result);
+        }
+    });
+});
 function salvarImagem(img_cliente64){
     var imagemBinary = new Buffer(img_cliente64, 'base64');
     var imgCliente = "img/" + uniqid() + ".jpg";

@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.matheus.mobshare.InformacaoDialog;
 import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.presenter.VisualizarAnuncioPresenter;
@@ -21,11 +23,12 @@ import com.squareup.picasso.Picasso;
 public class FragmentListarAnuncios extends Fragment implements VisualizarAnuncioView {
 
     TextView txtNomeVeiculoHeader, txtValorHora, txtTipoVeiculo,
-            txtNomeVeiculo, txtAvaliacao, txtNumPessoas, txtMarca,
+            txtAvaliacao, txtNumPessoas, txtMarca,
             txtModeloVeiculo, txtAnoVeiculo, txtQuilometragem, txtPlaca, txtEndereco, txtNomeLocador;
     ImageView img_veiculo;
 
     int id_anuncio;
+    Button btnInteressado;
 
     VisualizarAnuncioPresenter visualizarAnuncioPresenter;
 
@@ -47,10 +50,10 @@ public class FragmentListarAnuncios extends Fragment implements VisualizarAnunci
         }
 
         img_veiculo = view.findViewById(R.id.imgCarros);
+        btnInteressado = view.findViewById(R.id.btnInteressado);
+
         txtNomeVeiculoHeader = view.findViewById(R.id.txtNomeVeiculoHeader);
         txtValorHora = view.findViewById(R.id.txtValorHora);
-        txtTipoVeiculo = view.findViewById(R.id.txtTipoVeiculo);
-        txtNomeVeiculo = view.findViewById(R.id.txtNomeVeiculo);
         txtAvaliacao = view.findViewById(R.id.txtAvaliacao);
         txtNumPessoas = view.findViewById(R.id.txtNumPessoas);
         txtMarca = view.findViewById(R.id.txtMarca);
@@ -60,13 +63,19 @@ public class FragmentListarAnuncios extends Fragment implements VisualizarAnunci
         txtPlaca = view.findViewById(R.id.txtPlaca);
         txtEndereco = view.findViewById(R.id.txtEndereco);
         txtNomeLocador = view.findViewById(R.id.txtNomeLocador);
-
+        txtTipoVeiculo = view.findViewById(R.id.txtTipoVeiculo);
         visualizarAnuncioPresenter = new VisualizarAnuncioPresenter( this, ServiceFactoty.create());
         visualizarAnuncioPresenter.retonarAnuncio(id_anuncio);
 
+
+        btnInteressado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new InformacaoDialog(getContext()).show();
+            }
+        });
         return view;
     }
-
     @Override
     public void CarregarAnuncioPorId(AnunciosView anunciosView) {
 
@@ -76,7 +85,6 @@ public class FragmentListarAnuncios extends Fragment implements VisualizarAnunci
         txtNomeVeiculoHeader.setText(anunciosView.getNome_modelo());
         txtValorHora.setText("R$ " + anunciosView.getValor_hora() + "/h");
         txtTipoVeiculo.setText(anunciosView.getNome_tipo_veiculo());
-        txtNomeVeiculo.setText(anunciosView.getNome_marca() + " " + anunciosView.getNome_modelo() );
 //        txtAvaliacao = findViewById(R.id.txtAvaliacao);
 //        txtNumPessoas = findViewById(R.id.txtNumPessoas);
         txtMarca.setText(anunciosView.getNome_marca());
