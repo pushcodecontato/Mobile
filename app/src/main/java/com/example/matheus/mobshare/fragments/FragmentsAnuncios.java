@@ -40,6 +40,7 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
     public FragmentsAnuncios(){}
     Integer id_tipo_veiculo, id_marca_veiculo, id_modelo_veiculo;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,11 +120,18 @@ public class FragmentsAnuncios extends Fragment implements ListaAnuncioView, Ada
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         bundle = new Bundle();
         AnunciosView anunciosView = anuncioAdapter.getItem(position);
+        FragmentManager fm = getFragmentManager();
         Fragment fragment = new FragmentListarAnuncios();
+
         bundle.putInt("id_anuncio", anunciosView.getId_anuncio());
         fragment.setArguments(bundle);
 
         activity.navegarFragment(fragment, tag);
+//        fm.beginTransaction().replace(R.id.frame_layout, fragment).commit();
+
+
+
+
     }
 
 

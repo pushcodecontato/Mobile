@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="135dp"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="@drawable/notificacao_radius"
+    >
+
+    <LinearLayout
+        android:layout_width="125dp"
+        android:layout_height="120dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/user"
+            android:id="@+id/imgUserLocatario"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="O fulano está interessado em alugar seu veículo X."
+            android:textColor="@color/white"
+            android:id="@+id/idSolicitacao"
+            android:textSize="15dp"
+            />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Periodo inicial: 19/05/2019-13h00"
+                android:layout_marginTop="5dp"
+                android:id="@+id/txtPeriodoInicial"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Periodo final:   19/05/2019-15h00"
+                android:layout_marginTop="5dp"
+                android:id="@+id/txtPeriodoFinal"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            >
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:background="@color/verde_site"
+                android:layout_marginTop="5dp"
+                android:id="@+id/btnceitar"
+                android:clickable="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aceitar"
+                    android:textColor="@color/white"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_accept"
+                    />
+
+            </LinearLayout>.
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:background="@color/verde_site"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:id="@+id/btnRejeitar"
+                android:onClick="teste"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rejeitar"
+                    android:textColor="@color/white"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_error"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

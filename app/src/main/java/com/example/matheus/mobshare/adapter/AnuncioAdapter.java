@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.matheus.mobshare.Model.AnunciosView;
@@ -16,6 +15,8 @@ import com.example.matheus.mobshare.service.MobShareService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AnuncioAdapter extends ArrayAdapter<AnunciosView> {
 
@@ -39,8 +40,9 @@ public class AnuncioAdapter extends ArrayAdapter<AnunciosView> {
         TextView txtAvaliacao = v.findViewById(R.id.txtAvaliacao);
         TextView txtNumPessoas = v.findViewById(R.id.numero_pessoas);
 
-        ImageView img_veiculo = v.findViewById(R.id.img_veiculo);
+        CircleImageView img_veiculo = v.findViewById(R.id.img_veiculo);
         String url_foto = MobShareService.URL_FOTO + "/mobshare/view/upload/"+anunciosView.getNome_foto();
+
         Picasso.get().load(url_foto).placeholder(R.drawable.camera).into(img_veiculo);
 
         txtNome_veiculo.setText(anunciosView.getNome_marca() + " " + anunciosView.getNome_modelo());

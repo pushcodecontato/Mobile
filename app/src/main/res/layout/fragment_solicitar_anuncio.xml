@@ -2,16 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="400dp"
-    android:layout_height="600dp"
-    android:gravity="center"
-    >
+    android:layout_height="550dp"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="40dp"
         android:orientation="vertical"
-        android:background="@drawable/locacao_dialog"
 
         >
         <TextView
@@ -62,43 +60,6 @@
             android:layout_height="40dp"
             android:id="@+id/hrEntrega"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Comentario"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="3"
-            android:id="@+id/txtComentario"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Valor previsto"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                android:text="100,00 R$"
-                />
-        </LinearLayout>
-
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -107,6 +68,7 @@
             android:textColor="@color/white"
             android:layout_marginTop="10mm"
             android:firstBaselineToTopHeight="@dimen/cardview_compat_inset_shadow"
+            android:id="@+id/solicitarLocacao"
             />
 
     </LinearLayout>

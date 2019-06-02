@@ -6,6 +6,8 @@ import com.example.matheus.mobshare.Model.Cliente;
 import com.example.matheus.mobshare.Model.MarcaVeiculo;
 import com.example.matheus.mobshare.Model.MeusVeiculos;
 import com.example.matheus.mobshare.Model.ModeloVeiculo;
+import com.example.matheus.mobshare.Model.Notificacao;
+import com.example.matheus.mobshare.Model.SolicitacaoAnuncio;
 import com.example.matheus.mobshare.Model.TipoVeiculo;
 
 import java.util.ArrayList;
@@ -30,11 +32,20 @@ public interface MobShareService {
     @GET("/anuncios/{id}")
     Call<List<AnunciosView>> obterAnuncioPorId(@Path("id") int id_anuncio);
 
+    @POST("/solicitar_anuncio")
+    Call<ApiResult>solicitarAnuncio(@Body SolicitacaoAnuncio solicitacaoAnuncio);
+
+    @GET("/notificacoes/{id}")
+    Call<List<Notificacao>>notificacaoView(@Path("id") int id_locador);
+
     @POST("/register")
     Call<ApiResult> cadastrarCliente(@Body Cliente cliente);
 
     @POST("/login")
     Call<List<Cliente>> loginCliente(@Body Cliente cliente);
+
+    @POST("/notificacoes/confimarSolicitacao")
+    Call <ApiResult> confirmarSolicitacao(@Body Notificacao notificacao);
 
     @GET("/tipoVeiculo")
     Call <List<TipoVeiculo>> carregarSpinnerTipoVeiculo();

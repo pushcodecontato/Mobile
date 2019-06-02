@@ -17,9 +17,9 @@
             android:icon="@drawable/my_car"
             android:title="Meus véiculos" />
 
-        <item android:id="@+id/nav_realizadas"
+        <item android:id="@+id/nav_notificacao"
             android:icon="@drawable/anuncio2"
-            android:title="Locações realizadas" />
+            android:title="Notificação" />
 
         <item android:id="@+id/nav_andamento"
             android:icon="@drawable/play"

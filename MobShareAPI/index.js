@@ -1,10 +1,12 @@
 const app = require("express")();
 const http = require("http").createServer(app);
+const bodyParser = require("body-parser");
+const mysql = require("mysql");
+
 var fs = require("fs");
 var uniqid = require("uniqid");
-const bodyParser = require("body-parser");
-
-const mysql = require("mysql");
+var md5 = require('md5');
+var moment = require('moment');
 
 app.use(bodyParser.json({limit : "50mb"}));
 
@@ -30,6 +32,7 @@ mysqlConnection.connect((erro)=>{
 
 app.get("/", (req, res) => {
     res.send("Bem Vindo a API da Mob'Share!")
+    
 })
 //Listar todos os anuncios
 app.post("/anuncios", (req, res) => {
@@ -93,10 +96,7 @@ app.post("/register",async (req, res) => {
 
     var dt_nasc = ano + "-" + mes + "-" + dia
 	
-	var imagemBinary = new Buffer(img_cliente64, 'base64');
-	var imgCliente = "img/" + uniqid() + ".jpg";
-	
-
+    var senha_crypt = md5(senha);
     //Primeira consulta para verificar se o email existe
     sql = `SELECT count(*) as linhas FROM tbl_cliente WHERE email ="${email_cliente}"`;
     let rows = await new Promise((resolve, reject) => {    
@@ -113,7 +113,8 @@ app.post("/register",async (req, res) => {
         if(senha != conf_senha){
             res.send({"sucesso" : false, "mensagem" : "As senhas inseridas precisam ser iguais!"});
         }else{
-            sql = `INSERT INTO tbl_cliente (foto_cliente, nome_cliente, email, dt_nascimento, senha) VALUES ("${imgCliente}", "${nome}", "${email_cliente}", "${dt_nasc}", "${senha}")`;
+			var senha_crypt = 
+            sql = `INSERT INTO tbl_cliente (foto_cliente, nome_cliente, email, dt_nascimento, senha) VALUES ("${imgCliente}", "${nome}", "${email_cliente}", "${dt_nasc}", "${senha_crypt}")`;
             mysqlConnection.query(sql, function (erro, result, field){
                 if(!erro){				
 					res.send({"sucesso": true, 
@@ -134,8 +135,10 @@ app.post("/login", (req, res) => {
     
     const email = req.body.email_cliente;
     const senha = req.body.senha;
-	
-	sql = `SELECT * FROM tbl_cliente WHERE email = "${email}" AND senha = "${senha}"`;
+    
+    let senha_crypt  = md5(senha);
+    
+	sql = `SELECT * FROM tbl_cliente WHERE email = "${email}" AND senha = "${senha_crypt}"`;
 	
     mysqlConnection.query(sql, function(erro, result){
         if(erro){
@@ -228,11 +231,133 @@ app.get("/getVeiculos/:idCliente", (req, res) => {
             console.log("Erro: " + sql);
         }else{
             res.send(result);
-            console.log(sql);
             console.log(result);
         }
     });
 });
+app.post("/solicitar_anuncio", (req, res)=>{
+
+    let id_anuncio = parseInt(req.body.id_anuncio);
+    let id_cliente = parseInt(req.body.id_cliente);
+
+    let data_inicio = req.body.data_inicio;
+    let data_final =  req.body.data_final;
+    let hora_inicial = req.body.hora_inicial;
+    let hora_final = req.body.hora_final;
+    
+    sql = `INSERT INTO tbl_solicitacao_anuncio(id_anuncio, id_cliente, data_inicio, data_final, hora_inicial, hora_final) VALUES (${id_anuncio}, ${id_cliente}, '${data_inicio}', '${data_final}', '${hora_inicial}', '${hora_final}')`;
+    
+    mysqlConnection.query(sql, function(erro, result, field){
+        if(erro){
+            res.send({"sucesso": false, "mensagem": "Ocorreu uma falha na sua solicitação, tente mais tarde"});
+            console.log("Erro: " + erro + sql);
+        }else{
+            res.send({"sucesso": true, "mensagem": "Solicitação enviada com sucesso, aguarde a confirmação do locador!"});
+            console.log(sql);
+            console.log(result);
+        }
+    });
+
+});
+app.get("/notificacoes/:id_locador", (req, res)=>{
+
+    let id_locador = parseInt(req.params.id_locador);
+
+    sql = `SELECT * FROM view_notificacoes where id_locador =${id_locador}`;
+    
+    mysqlConnection.query(sql, function(erro, result, field){
+        if(erro){
+            console.log("Erro: " + sql);
+        }else{
+            res.send(result);
+        }
+    });
+
+});
+app.post("/notificacoes/confimarSolicitacao", (req, res)=>{
+    let status_solicitacao = parseInt(req.body.status_solicitacao);
+    let id_solicitacao = parseInt(req.body.id_solicitacao_anuncio);
+    let id_locatario = parseInt(req.body.id_locatario);
+    let id_percentual = parseInt(req.body.id_percentual);
+    let valor_hora = req.body.valor_hora
+    let id_anuncio = parseInt(req.body.id_anuncio);    
+
+    let data_inicio = req.body.data_inicio;
+    let data_final = req.body.data_final;
+    let hora_inicial = req.body.hora_inicial;
+    let hora_final = req.body.hora_final;
+
+    let perido_inicial = data_inicio + " " + hora_inicial;
+    let periodo_final = data_final + " " + hora_final;
+
+    let valor_total = calcData(perido_inicial, periodo_final, valor_hora)
+
+
+    if(status_solicitacao == 1){
+        sql = `INSERT INTO tbl_locacao (id_cliente_locador, id_anuncio, valor_locacao, data_hora_final, id_percentual, status_finalizado, data_hora_inicial)
+        VALUES(${id_locatario},${id_anuncio}, ${valor_total}, null ,${id_percentual},0, null)`;
+
+        mysqlConnection.query(sql, function(erro, result, field){
+            if(erro){
+                console.log("ERRO" + sql);
+                res.send({"sucesso": false, "mensagem": "Não foi possivel"});
+            }else{
+                let id_locacao = result.insertId;
+                sql = `UPDATE tbl_solicitacao_anuncio SET status_solicitacao = ${status_solicitacao}, id_locacao = ${id_locacao} WHERE id_solicitacao_anuncio = ${id_solicitacao}`;
+                mysqlConnection.query(sql, function(erro, result, field){
+                    if(erro){
+                        res.send({"sucesso": false, "mensagem": "Não foi possivel"});
+                        console.log("Erro" + sql);
+                    }else{  
+                        res.send({"sucesso": true, "mensagem": "Seu anuncio já está em andamento."});
+                        
+                    }
+                });
+            }
+        });
+       
+
+    }else if(status_solicitacao == 2){
+        sql = `UPDATE tbl_solicitacao_anuncio SET status_solicitacao = ${status_solicitacao} WHERE id_solicitacao_anuncio = ${id_solicitacao}`;
+
+        mysqlConnection.query(sql, function(erro, result, field){
+            if(erro){
+                res.send({"sucesso": false, "mensagem": "Não foi possível recusar a solicitação. Tente novamente mais tarde."});
+                console.log("Erro: " + sql);
+            }else{
+                res.send({"sucesso": true, "mensagem": "Solicitação recusada com sucesso."});
+
+                console.log("AQUI");
+            }
+        });
+    }
+
+});
+app.get('/notificacoes/andamento/:id_locador', (req, res)=>{
+
+
+    sql = `SELECT * FROM view_andamento WHERE locador = ${req.params.id_locador}`;
+
+    mysqlConnection.query(sql, function(erro, result, field){
+        if(erro){
+            console.log("Erro: " + sql);
+        }else{
+            res.send(result);
+            console.log(result);
+        }
+    });
+});
+
+
+function calcData(peridoInicial, periodoFinal, valor_hora){
+    var data1 = moment(peridoInicial, "YYYY-MM-DD hh:mm");
+    var data2 = moment(periodoFinal, "YYYY-MM-DD hh:mm");
+    var diferenca = data1.diff(data2, 'hours') * -1;
+
+    let valor_total = parseFloat(diferenca * valor_hora);
+    
+    return valor_total;
+}
 function salvarImagem(img_cliente64){
     var imagemBinary = new Buffer(img_cliente64, 'base64');
     var imgCliente = "img/" + uniqid() + ".jpg";

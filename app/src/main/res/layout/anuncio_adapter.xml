@@ -2,35 +2,34 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="155dp"
     android:orientation="vertical"
-    android:paddingTop="8dp"
+    android:paddingTop="10dp"
     android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+
+
     >
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@drawable/anuncio_radius"
+        android:layout_height="145dp"
+        android:background="@drawable/notificacao_radius"
         android:padding="10dp"
         android:orientation="horizontal"
         >
-    <ImageView
-        android:layout_width="140dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="125dp"
         android:layout_height="120dp"
         android:id="@+id/img_veiculo"
-        android:scaleType = "fitXY"
-        android:adjustViewBounds = "true"
-
         />
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical"
-           android:layout_marginLeft="10dp"
+           android:layout_marginLeft="15dp"
+           android:layout_marginTop="5dp"
 
            >
            <TextView
@@ -38,7 +37,7 @@
                android:layout_height="wrap_content"
                android:text="Nome Veículo"
                android:textSize="18sp"
-               android:textColor="@color/black"
+               android:textColor="@color/white"
                android:id="@+id/nome_veiculo"
                />
            <TextView
@@ -47,7 +46,7 @@
                android:text="Nome locador"
                android:textSize="14sp"
                android:layout_marginTop="5dp"
-               android:textColor="@color/black"
+               android:textColor="@color/white"
                android:id="@+id/nome_locador"
                />
 
@@ -57,7 +56,7 @@
                android:text="Endereço"
                android:textSize="14sp"
                android:layout_marginTop="2dp"
-               android:textColor="@color/black"
+               android:textColor="@color/white"
                android:id="@+id/endereco"
                />
            <LinearLayout
@@ -72,13 +71,14 @@
                    android:layout_height="wrap_content"
                    android:textSize="16dp"
                    android:text="4.7"
-                   android:textColor="@color/black"
+                   android:textColor="@color/white"
                    android:id="@+id/txtAvaliacao"
                    />
                <ImageView
                    android:layout_width="22dp"
                    android:layout_height="22dp"
                    android:src="@drawable/star"
+                   android:layout_marginLeft="5dp"
                    />
                <TextView
                    android:layout_width="wrap_content"
@@ -86,21 +86,23 @@
                    android:textSize="16dp"
                    android:text="15"
                    android:layout_marginLeft="15dp"
-                   android:textColor="@color/black"
+                   android:textColor="@color/white"
                    android:id="@+id/numero_pessoas"
                    />
                <ImageView
                    android:layout_width="22dp"
                    android:layout_height="22dp"
                    android:src="@drawable/people"
+                   android:layout_marginLeft="5dp"
                    />
 
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:textSize="16dp"
-                   android:layout_marginLeft="60dp"
-                   android:textColor="@color/black"
+                   android:text="teste"
+                   android:layout_marginLeft="10dp"
+                   android:textColor="@color/white"
                    android:id="@+id/valor"
                    />
            </LinearLayout>

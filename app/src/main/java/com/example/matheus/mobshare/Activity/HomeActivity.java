@@ -12,16 +12,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
 import com.example.matheus.mobshare.fragments.FragmentMeusVeiculos;
+import com.example.matheus.mobshare.fragments.FragmentNotificacoes;
 import com.example.matheus.mobshare.fragments.FragmentsAnuncios;
 import com.example.matheus.mobshare.service.MobShareService;
 import com.squareup.picasso.Picasso;
@@ -74,7 +73,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         String fotoCliente = sharedPreferences_home.getString("FotoCliente", "null");
 
         String url_foto = MobShareService.URL_FOTO + "/mobshare/view/upload/"+fotoCliente;
-
         txtNomeCliente.setText(nomeCliente);
         Picasso.get().load(url_foto).into(imgCliente);
 
@@ -88,17 +86,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_locados: {
-                Toast.makeText(this, "Menu 3", Toast.LENGTH_SHORT).show();
-                Log.d("TESTE!", "Menu3 ");
+                Fragment fragment = new FragmentsAnuncios();
+                navegarFragment(fragment, tag);
                 break;
             }
             case R.id.nav_alugados: {
-                Toast.makeText(this, "Menu 3", Toast.LENGTH_SHORT).show();
-                Log.d("TESTE!", "Menu3 ");
+                Fragment fragment = new FragmentsAnuncios();
+                navegarFragment(fragment, tag);
                 break;
             }
             case R.id.nav_veiculos: {
                 Fragment fragment = new FragmentMeusVeiculos();
+                navegarFragment(fragment, tag);
+                break;
+            }
+            case R.id.nav_notificacao: {
+                Fragment fragment = new FragmentNotificacoes();
                 navegarFragment(fragment, tag);
                 break;
             }
@@ -108,8 +111,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             default: {
-                Toast.makeText(this, "Menu Default", Toast.LENGTH_SHORT).show();
-                Log.d("TESTE!", "Menu5 ");
+                Fragment fragment = new FragmentsAnuncios();
+                navegarFragment(fragment, tag);
                 break;
             }
         }

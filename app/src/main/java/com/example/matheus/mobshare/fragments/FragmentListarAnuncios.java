@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.matheus.mobshare.InformacaoDialog;
+import com.example.matheus.mobshare.Activity.HomeActivity;
 import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.presenter.VisualizarAnuncioPresenter;
@@ -22,6 +23,7 @@ import com.squareup.picasso.Picasso;
 
 public class FragmentListarAnuncios extends Fragment implements VisualizarAnuncioView {
 
+    static String tag = "FragmentListarAnuncios";
     TextView txtNomeVeiculoHeader, txtValorHora, txtTipoVeiculo,
             txtAvaliacao, txtNumPessoas, txtMarca,
             txtModeloVeiculo, txtAnoVeiculo, txtQuilometragem, txtPlaca, txtEndereco, txtNomeLocador;
@@ -30,6 +32,8 @@ public class FragmentListarAnuncios extends Fragment implements VisualizarAnunci
     int id_anuncio;
     Button btnInteressado;
 
+    HomeActivity activity;
+    Bundle bundle;
     VisualizarAnuncioPresenter visualizarAnuncioPresenter;
 
     public FragmentListarAnuncios(){}
@@ -43,7 +47,7 @@ public class FragmentListarAnuncios extends Fragment implements VisualizarAnunci
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.visualizar_anuncios,container,false);
-        Bundle bundle = new Bundle();
+        bundle = new Bundle();
         if(bundle != null){
             bundle = getArguments();
             id_anuncio = bundle.getInt("id_anuncio");
@@ -66,12 +70,18 @@ public class FragmentListarAnuncios extends Fragment implements VisualizarAnunci
         txtTipoVeiculo = view.findViewById(R.id.txtTipoVeiculo);
         visualizarAnuncioPresenter = new VisualizarAnuncioPresenter( this, ServiceFactoty.create());
         visualizarAnuncioPresenter.retonarAnuncio(id_anuncio);
+        activity = (HomeActivity) getActivity();
 
 
         btnInteressado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new InformacaoDialog(getContext()).show();
+                FragmentManager fm = getFragmentManager();
+                Fragment fragment = new FragmentSolicitarAnuncio();
+                bundle.putInt("id_anuncio", id_anuncio);
+
+                fragment.setArguments(bundle);
+                fm.beginTransaction().replace(R.id.frame_layout, fragment).commit();
             }
         });
         return view;
