@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.matheus.mobshare.R;
 import com.example.matheus.mobshare.adapter.AnuncioAdapter;
+import com.example.matheus.mobshare.fragments.FragmentAndamento;
 import com.example.matheus.mobshare.fragments.FragmentMeusVeiculos;
 import com.example.matheus.mobshare.fragments.FragmentNotificacoes;
 import com.example.matheus.mobshare.fragments.FragmentsAnuncios;
@@ -111,7 +112,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             default: {
-                Fragment fragment = new FragmentsAnuncios();
+                Fragment fragment = new FragmentAndamento();
                 navegarFragment(fragment, tag);
                 break;
             }
@@ -135,10 +136,5 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void navegarFragment(Fragment fragment, String tag){
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frame_layout, fragment).addToBackStack(tag).commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }

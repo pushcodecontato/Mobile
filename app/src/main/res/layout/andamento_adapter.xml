@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="145dp"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="@drawable/notificacao_radius"
+    >
+
+    <LinearLayout
+        android:layout_width="125dp"
+        android:layout_height="140dp"
+        android:orientation="vertical"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:src="@drawable/user"
+            android:id="@+id/imgUserAndamento"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Matheus Vieira"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:id="@+id/txtNomeLocatario"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="8dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veiculo: BMW X1"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:id="@+id/txtVeiculo"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Período inicial: 12/00/0000 13:00"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:id="@+id/txtPeriodoInicialAndamento"
+            android:layout_marginTop="3dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Período final: 12/00/0000 13:00"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:id="@+id/txtPeriodoFinalAndamento"
+            android:layout_marginTop="3dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valor hora: 20.50 valor total: 150"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:id="@+id/txtValorLocacao"
+            android:layout_marginTop="3dp"
+            />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

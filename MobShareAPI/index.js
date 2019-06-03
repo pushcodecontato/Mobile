@@ -336,7 +336,22 @@ app.post("/notificacoes/confimarSolicitacao", (req, res)=>{
 app.get('/notificacoes/andamento/:id_locador', (req, res)=>{
 
 
-    sql = `SELECT * FROM view_andamento WHERE locador = ${req.params.id_locador}`;
+    sql = `SELECT * FROM view_andamento WHERE locador = ${req.params.id_locador} OR id_cliente_locador = ${req.params.id_locador}`;
+
+    mysqlConnection.query(sql, function(erro, result, field){
+        if(erro){
+            console.log("Erro: " + sql);
+        }else{
+            res.send(result);
+            console.log(result);
+        }
+    });
+});
+
+app.get('/notificacoes/andamento/visualizar/:id_locacao', (req, res)=>{
+
+
+    sql = `SELECT * FROM view_andamento WHERE id_locacao = ${req.params.id_locacao}`;
 
     mysqlConnection.query(sql, function(erro, result, field){
         if(erro){

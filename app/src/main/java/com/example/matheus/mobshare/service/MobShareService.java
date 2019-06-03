@@ -1,5 +1,6 @@
 package com.example.matheus.mobshare.service;
 
+import com.example.matheus.mobshare.Model.Andamento;
 import com.example.matheus.mobshare.Model.AnunciosView;
 import com.example.matheus.mobshare.Model.ApiResult;
 import com.example.matheus.mobshare.Model.Cliente;
@@ -22,21 +23,15 @@ import retrofit2.http.Path;
 public interface MobShareService {
 
 //    String URL_BASE = "http://10.0.2.2:5001";
-    String URL_BASE = "http://192.168.43.123:5001";
-//    String URL_BASE = "http://192.168.0.107:5001";
-    String URL_FOTO =  "http://192.168.43.123";
+//    String URL_BASE = "http://192.168.43.123:5001";
+    String URL_BASE = "http://192.168.0.107:5001";
+    String URL_FOTO =  "http://192.168.0.107";
 
     @POST("/anuncios")
     Call<List<AnunciosView>> obterAnuncios(@Body ArrayList<String> filtro);
 
-    @GET("/anuncios/{id}")
-    Call<List<AnunciosView>> obterAnuncioPorId(@Path("id") int id_anuncio);
-
     @POST("/solicitar_anuncio")
     Call<ApiResult>solicitarAnuncio(@Body SolicitacaoAnuncio solicitacaoAnuncio);
-
-    @GET("/notificacoes/{id}")
-    Call<List<Notificacao>>notificacaoView(@Path("id") int id_locador);
 
     @POST("/register")
     Call<ApiResult> cadastrarCliente(@Body Cliente cliente);
@@ -58,4 +53,16 @@ public interface MobShareService {
 
     @GET("/getVeiculos/{id}")
     Call<List<MeusVeiculos>> obterVeiculos(@Path("id") int id_veiculo);
+
+    @GET("/notificacoes/{id}")
+    Call<List<Notificacao>>notificacaoView(@Path("id") int id_locador);
+
+    @GET("/anuncios/{id}")
+    Call<List<AnunciosView>> obterAnuncioPorId(@Path("id") int id_anuncio);
+
+    @GET("/notificacoes/andamento/{id}")
+    Call<List<Andamento>> obterAndamentos(@Path("id") int id_locador);
+
+    @GET("/notificacoes/andamento/visualizar/{id}")
+    Call<List<Andamento>> visualizarAndamentos(@Path("id") int id_locacao);
 }

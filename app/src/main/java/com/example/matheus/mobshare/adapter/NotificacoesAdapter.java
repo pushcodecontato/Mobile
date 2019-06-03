@@ -3,6 +3,7 @@ package com.example.matheus.mobshare.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,8 @@ public class NotificacoesAdapter extends ArrayAdapter<Notificacao>{
 
         String url_foto = MobShareService.URL_FOTO + "/mobshare/view/upload/"+notificacao.getFoto_cliente();
         Picasso.get().load(url_foto).placeholder(R.drawable.camera).into(imgUserLocatario);
+
+        Log.d("TESTE", url_foto);
 
         String dataInicioBr = dateUtil.convertToBr(notificacao.getData_inicio());
         String dataFinalBr = dateUtil.convertToBr(notificacao.getData_final() );

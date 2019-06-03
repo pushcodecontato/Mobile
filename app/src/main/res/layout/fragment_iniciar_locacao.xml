@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@color/verde_site"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+
+            android:id="@+id/imgCarrosAndamento"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            >
+
+                            <TextView
+                                android:id="@+id/txtValorTotalAndamento"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="R$30,00/h"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="5dp"
+
+                                >
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="5dp"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Tipo veiculo: "
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        android:id="@+id/txtTipoVeiculoAndamento"
+                                        />
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="5dp"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Marca: "
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        android:id="@+id/txtMarcaAndamento"
+                                        />
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="5dp"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Modelo: "
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        android:id="@+id/txtModeloVeiculoAndamento"
+                                        />
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="5dp"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Ano: "
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        android:id="@+id/txtAnoVeiculoAndamento"
+                                        />
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="5dp"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Quilomentragem: "
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        android:id="@+id/txtQuilometragemAndamento"
+                                        />
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="5dp"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Placa: "
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textSize="15sp"
+                                        android:textColor="@color/black"
+                                        android:id="@+id/txtPlacaAndamento"
+                                        />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        >
+                    <LinearLayout
+                        android:layout_width="110dp"
+                        android:layout_height="120dp"
+                        android:orientation="vertical"
+                        >
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/user"
+                            android:id="@+id/imgUserAndamento"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        >
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sobre o locatário"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"
+                            />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nome: "
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/txtNomeLocatario"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="match_parent"
+                                    android:text="Endereço: "
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text=" "
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:id="@+id/txtEnderecoLocatario"
+                                    />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Email: "
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:id="@+id/txtEmailLocatario"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:layout_marginTop="30dp"
+                                >
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_padrao"
+                    android:textColor="@color/white"
+                    android:text="Iniciar"
+                    android:id="@+id/btnInteressadoAndamento"
+                    android:layout_marginTop="15dp"
+                    />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -68,6 +68,7 @@ public class FragmentListarAnuncios extends Fragment implements VisualizarAnunci
         txtEndereco = view.findViewById(R.id.txtEndereco);
         txtNomeLocador = view.findViewById(R.id.txtNomeLocador);
         txtTipoVeiculo = view.findViewById(R.id.txtTipoVeiculo);
+
         visualizarAnuncioPresenter = new VisualizarAnuncioPresenter( this, ServiceFactoty.create());
         visualizarAnuncioPresenter.retonarAnuncio(id_anuncio);
         activity = (HomeActivity) getActivity();
