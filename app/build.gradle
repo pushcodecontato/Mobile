@@ -42,4 +42,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     //Biblioteca picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //design
+    implementation 'com.android.support:design:28.+'
 }

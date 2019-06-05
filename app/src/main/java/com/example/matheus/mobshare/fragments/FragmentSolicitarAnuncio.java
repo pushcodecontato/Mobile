@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.matheus.mobshare.DateUtil;
@@ -31,6 +32,7 @@ public class FragmentSolicitarAnuncio extends Fragment implements SolicitarAnunc
     MobShareService mobShareService = ServiceFactoty.create();
     SolicitacaoAnuncio solicitacaoAnuncio;
     Integer id_anuncio, idCliente;
+    ImageView abrirCalendario;
     public FragmentSolicitarAnuncio(){}
 
     @Override
@@ -61,10 +63,6 @@ public class FragmentSolicitarAnuncio extends Fragment implements SolicitarAnunc
         btnSolicitarAnuncio = view.findViewById(R.id.solicitarLocacao);
         solicitacaoAnuncio = new SolicitacaoAnuncio();
 
-        dtEntraga.setText("05/02/2019");
-        dtRetirada.setText("05/03/2019");
-        hrEntrega.setText("20:00");
-        hrRetirada.setText("21:00");
 
         presenter = new SolicitarAnuncioPresenter(this,mobShareService);
 
@@ -102,7 +100,6 @@ public class FragmentSolicitarAnuncio extends Fragment implements SolicitarAnunc
 
         return view;
     }
-
     @Override
     public void solicitarAnuncioSucesso(String mensagem) {
         Toast.makeText(getContext(), mensagem, Toast.LENGTH_LONG).show();
@@ -115,4 +112,5 @@ public class FragmentSolicitarAnuncio extends Fragment implements SolicitarAnunc
     public void solicitarAnuncioFracasso(String mensagem) {
         Toast.makeText(getContext(), mensagem, Toast.LENGTH_LONG).show();
     }
+
 }
